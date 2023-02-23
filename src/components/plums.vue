@@ -1,6 +1,6 @@
-<script setup>
+<script setup="props">
 import { onMounted, reactive, ref } from 'vue'
-import { useRafFn } from '@vueuse/core'
+import { useRafFn, useWindowSize } from '@vueuse/core'
 const r180 = Math.PI
 const r90 = Math.PI / 2
 const r15 = Math.PI / 12
@@ -14,7 +14,7 @@ const len = ref(6)
 const stopped = ref(false)
 function initCanvas (canvas, width = 400, height = 400, _dpi) {
   const ctx = canvas.getContext('2d')
-  const dpr = widow.devicePixelRatio || 1
+  const dpr = window.devicePixelRatio || 1
   const bsr =
     ctx.webkitBackingStorePixelRatio ||
     ctx.mozBackingStorePixelRatio ||
@@ -68,8 +68,9 @@ onMounted(async () => {
   }
 
   let lastTime = performance.now()
-  const interval = 1000 / 40
-  let controls
+  const interval = 1000 / 30
+  // eslint-disable-next-line
+  let controls = ref(useRafFn())
   const frame = () => {
     if (performance.now() - lastTime < interval) {
       return
@@ -79,14 +80,14 @@ onMounted(async () => {
     steps = []
     lastTime = performance.now()
     if (!prevSteps.length) {
-      controls.pause()
+      controls.value.pause()
       stopped.value = true
     }
     prevSteps.forEach(i => i())
   }
-  controls = useRafFn(frame, { immediate: false })
+  controls.value = useRafFn(frame, { immediate: false })
   start.value = () => {
-    controls.pause()
+    controls.value.pause()
     iterations = 0
     ctx.clearRect(0, 0, width, height)
     ctx.lineWidth = 1
@@ -101,7 +102,7 @@ onMounted(async () => {
     if (size.width < 500) {
       steps = steps.slice(0, 2)
     }
-    controls.resume()
+    controls.value.resume()
     stopped.value = false
   }
   start.value()
