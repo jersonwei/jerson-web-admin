@@ -1,6 +1,8 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
+import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
+const store = useStore()
 const formRules = {
   username: [{ required: true, message: '必须输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '必须输入密码', trigger: 'blur' }]
@@ -8,25 +10,19 @@ const formRules = {
 const formRef = ref()
 const remember = ref(true)
 const loading = ref(false)
-const getShow = computed(() => true)
+const getShow = computed(
+  () => store.state.user.currentState === LoginState.LOGIN
+)
 const formData = reactive({
   username: 'jersonwang',
   password: 'admin'
 })
-const setLoginState = () => {}
-const handleLogin = () => {}
-const currentState = ref(LoginState.LOGIN)
-const useLoginState = () => {
-  function setLoginState (state) {
-    currentState.value = state
-  }
-  const getLoginState = computed(() => currentState.value)
-  function handleBackLogin () {
-    setLoginState(LoginState.LOGIN)
-  }
-  return { setLoginState, getLoginState, handleBackLogin }
+const handleForgetPassWord = () => {
+  console.log(store.state.user.currentState)
+  store.commit('user/setCurrentState', LoginState.RESET_PASSWORD)
+  console.log(store.state.user.currentState)
 }
-console.log(useLoginState)
+const handleLogin = () => {}
 </script>
 <template>
   <div class="login-container">
@@ -63,7 +59,7 @@ console.log(useLoginState)
             <el-button
               style="font-size: 14px;"
               size="small"
-              @click="setLoginState"
+              @click="handleForgetPassWord"
             >
               忘记密码？
             </el-button>
