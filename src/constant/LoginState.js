@@ -1,0 +1,7 @@
+export const LoginState = {
+  LOGIN: 'LOGIN',
+  REGISTER: 'REGISTER',
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  MOBILE: 'MOBILE',
+  QR_CODE: 'QR_CODE'
+}

@@ -1,5 +1,6 @@
 <script setup>
 import plum from '../../components/Plums.vue'
+import ForgetPassword from './component/ForgetPassword.vue'
 import LoginForm from './component/LoginForm.vue'
 </script>
 <template>
@@ -7,6 +8,7 @@ import LoginForm from './component/LoginForm.vue'
     <plum></plum>
     <div style="width: 400px">
       <LoginForm></LoginForm>
+      <ForgetPassword></ForgetPassword>
     </div>
   </div>
 </template>

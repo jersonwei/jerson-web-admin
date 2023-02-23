@@ -1,20 +1,32 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
-
-const getShow = computed(() => true)
+import { LoginState } from '../../../constant/LoginState'
 const formRules = {
   username: [{ required: true, message: '必须输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '必须输入密码', trigger: 'blur' }]
 }
 const formRef = ref()
-const setLoginState = () => {}
 const remember = ref(true)
 const loading = ref(false)
+const getShow = computed(() => true)
 const formData = reactive({
   username: 'jersonwang',
   password: 'admin'
 })
+const setLoginState = () => {}
 const handleLogin = () => {}
+const currentState = ref(LoginState.LOGIN)
+const useLoginState = () => {
+  function setLoginState (state) {
+    currentState.value = state
+  }
+  const getLoginState = computed(() => currentState.value)
+  function handleBackLogin () {
+    setLoginState(LoginState.LOGIN)
+  }
+  return { setLoginState, getLoginState, handleBackLogin }
+}
+console.log(useLoginState)
 </script>
 <template>
   <div class="login-container">

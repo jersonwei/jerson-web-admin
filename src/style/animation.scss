@@ -1,0 +1,52 @@
+$ranges : 1,2,3,4,5,6,7;
+@each $range in $ranges {
+  * > .enter-x:nth-child(#{$range}) {
+    transform: translateX(50px);
+  }
+
+  * > .-enter-x:nth-child(#{$range}) {
+    transform: translateX(-50px);
+  }
+
+  * > .enter-y:nth-child(#{$range}) {
+    transform: translateY(50px);
+  }
+
+  * > .-enter-y:nth-child(#{$range}) {
+    transform: translateY(-50px);
+  }
+
+  * > .enter-x:nth-child(#{$range}),
+  * > .-enter-x:nth-child(#{$range}) {
+    animation: enter-x-animation 0.4s ease-in-out 0.3s;
+  }
+
+  * > .enter-y:nth-child(#{$range}),
+  * > .-enter-y:nth-child(#{$range}) {
+    animation: enter-y-animation 0.4s ease-in-out 0.3s;
+  }
+
+  * > .enter-x:nth-child(#{$range}),
+  * > .-enter-x:nth-child(#{$range}),
+  * > .enter-y:nth-child(#{$range}),
+  * > .-enter-y:nth-child(#{$range}) {
+    z-index: (10 - #{$range});
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: (#{$range} * 1 / 10s);
+  }
+}
+
+@keyframes enter-x-animation {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes enter-y-animation {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
