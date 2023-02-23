@@ -1,9 +1,20 @@
 <script setup>
 import plum from '../../components/Plums.vue'
+import LoginForm from './component/LoginForm.vue'
 </script>
 <template>
-  <div>
+  <div class="login">
     <plum></plum>
+    <div style="width: 400px">
+      <LoginForm></LoginForm>
+    </div>
   </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+</style>
