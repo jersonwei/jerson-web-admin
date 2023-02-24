@@ -1,5 +1,6 @@
 <script setup>
 import CountDownInput from '@/components/Countdown/src/CountDownInput.vue'
+import StrengthMeter from '@/components/StrengthMeter/src/StrengthMeter.vue'
 import { LoginState } from '@/constant/LoginState'
 import { ElMessage } from 'element-plus'
 import { computed, ref } from 'vue'
@@ -23,6 +24,12 @@ const handleRegister = () => {
 const handleBackLogin = () => {
   store.commit('user/setCurrentState', LoginState.LOGIN)
 }
+const handleScoreChange = val => {
+  console.log(val, 'score')
+}
+const handlePwdChange = val => {
+  console.log(val, 'val')
+}
 </script>
 <template>
   <el-form
@@ -45,14 +52,22 @@ const handleBackLogin = () => {
         size="large"
       ></el-input>
     </el-form-item>
-    <el-form-item class="enter-x" prop="sms">
+    <el-form-item class="enter-x count" prop="sms">
       <CountDownInput
         v-model="formData.sms"
         size="large"
         placeholder="短信验证码"
       ></CountDownInput>
     </el-form-item>
-    <el-form-item class="enter-x" prop="password">密码强度</el-form-item>
+    <el-form-item class="enter-x" prop="password">
+      <StrengthMeter
+        v-model="formData.password"
+        @score-change="handleScoreChange"
+        @change="handlePwdChange"
+        size="large"
+        placeholder="密码强度"
+      ></StrengthMeter>
+    </el-form-item>
     <el-form-item class="enter-x" prop="confirmPassword">
       <el-input
         type="password"
@@ -79,4 +94,12 @@ const handleBackLogin = () => {
     </el-form-item>
   </el-form>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.count {
+  ::v-deep .el-form-item__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>

@@ -18,9 +18,7 @@ const formData = reactive({
   password: 'admin'
 })
 const handleForgetPassWord = () => {
-  console.log(store.state.user.currentState)
   store.commit('user/setCurrentState', LoginState.RESET_PASSWORD)
-  console.log(store.state.user.currentState)
 }
 const handleMobile = () => {
   store.commit('user/setCurrentState', LoginState.MOBILE)
