@@ -1,4 +1,5 @@
 <script setup>
+import CountDownInput from '@/components/Countdown/src/CountDownInput.vue'
 import { LoginState } from '@/constant/LoginState'
 import { ElMessage } from 'element-plus'
 import { computed, ref } from 'vue'
@@ -9,6 +10,7 @@ const formRef = ref()
 const getShow = computed(
   () => store.state.user.currentState === LoginState.RESET_PASSWORD
 )
+const loading = ref(false)
 const formData = ref({
   username: '',
   mobile: '',
@@ -42,8 +44,12 @@ const handleBackLogin = () => {
         size="large"
       ></el-input>
     </el-form-item>
-    <el-form-item class="enter-x">
-      短信验证码
+    <el-form-item class="enter-x count" prop="sms">
+      <CountDownInput
+        size="large"
+        placeholder="短信验证码"
+        v-model="formData.sms"
+      ></CountDownInput>
     </el-form-item>
     <el-form-item class="enter-x">
       <el-button
@@ -66,4 +72,12 @@ const handleBackLogin = () => {
     </el-form-item>
   </el-form>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.count {
+  ::v-deep .el-form-item__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>

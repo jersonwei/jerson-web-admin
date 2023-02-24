@@ -23,6 +23,7 @@ const handleForgetPassWord = () => {
   console.log(store.state.user.currentState)
 }
 const handleLogin = () => {}
+const setLoginState = () => {}
 </script>
 <template>
   <div class="login-container">
