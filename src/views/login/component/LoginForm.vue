@@ -1,4 +1,5 @@
 <script setup>
+import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
 import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
@@ -48,9 +49,12 @@ const handleLogin = () => {}
       <div style="margin-bottom: 20px;">Web 登陆</div>
       <el-form-item class="enter-x" prop="username">
         <span class="svgComponent">
-          <el-icon>
+          <!-- <el-icon>
             <Avatar></Avatar>
-          </el-icon>
+          </el-icon> -->
+          <span class="svgComponent">
+            <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon>
+          </span>
         </span>
         <!-- <component :is="`el-icon-${toLine('Avatar')}`"></component> -->
         <el-input
