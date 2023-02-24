@@ -3,6 +3,7 @@ import plum from '../../components/Plums.vue'
 import ForgetPassword from './component/ForgetPassword.vue'
 import LoginForm from './component/LoginForm.vue'
 import MobileForm from './component/MobileForm.vue'
+import QrCodeForm from './component/QrCodeForm.vue'
 </script>
 <template>
   <div class="login">
@@ -11,6 +12,7 @@ import MobileForm from './component/MobileForm.vue'
       <LoginForm></LoginForm>
       <ForgetPassword></ForgetPassword>
       <MobileForm></MobileForm>
+      <QrCodeForm />
     </div>
   </div>
 </template>

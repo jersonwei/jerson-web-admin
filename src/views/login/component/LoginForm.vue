@@ -25,6 +25,9 @@ const handleForgetPassWord = () => {
 const handleMobile = () => {
   store.commit('user/setCurrentState', LoginState.MOBILE)
 }
+const handleQrCode = () => {
+  store.commit('user/setCurrentState', LoginState.QR_CODE)
+}
 const handleLogin = () => {}
 const setLoginState = () => {}
 </script>
@@ -88,7 +91,7 @@ const setLoginState = () => {}
           >
         </el-col>
         <el-col :span="7">
-          <el-button class="block" size="large" @click="setLoginState"
+          <el-button class="block" size="large" @click="handleQrCode"
             >二维码登录</el-button
           >
         </el-col>
