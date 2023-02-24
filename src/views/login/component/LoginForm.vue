@@ -57,6 +57,7 @@ const handleLogin = () => {}
           v-model="formData.username"
           placeholder="账号"
           :prefix-icon="'Avatar'"
+          name="username"
           size="large"
         ></el-input>
       </el-form-item>
@@ -70,6 +71,7 @@ const handleLogin = () => {}
           type="password"
           v-model="formData.password"
           placeholder="密码"
+          name="password"
           size="large"
         ></el-input>
       </el-form-item>
@@ -200,7 +202,7 @@ const handleLogin = () => {}
 $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
-$cursor: #fff;
+$cursor: rgba(211, 17, 240, 0.7);
 $black: #000;
 .login-container {
   min-height: 100%;
