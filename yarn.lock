@@ -1921,6 +1921,23 @@
   resolved "https://registry.npmmirror.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@zxcvbn-ts/core@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.npmmirror.com/@zxcvbn-ts/core/-/core-2.2.1.tgz#18780bde852b1f5068c93219b2dec78cb6d9c6f9"
+  integrity sha512-Cg1JyRpCDIF+Dh3nauqygmmCYxogNVZDxSn+9PgkPD1HZ2QiJe4elruVJrGmYRS7muGmZ1hNJq8ySQdPv6GHaw==
+  dependencies:
+    fastest-levenshtein "1.0.16"
+
+"@zxcvbn-ts/language-common@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npmmirror.com/@zxcvbn-ts/language-common/-/language-common-2.0.1.tgz#01c371a64e86de417c317b4443aaa0a0f07f917b"
+  integrity sha512-P+v5MA/UNc9nb3FEOEoDgTyIGQc2vLc6m04pdf5YyuNOzrL0iNANhECk2TUp62JbrjouJVodqhMH0j1a8/24Bg==
+
+"@zxcvbn-ts/language-en@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npmmirror.com/@zxcvbn-ts/language-en/-/language-en-2.1.0.tgz#52c797914380546b191e5b915e0e9843116eae18"
+  integrity sha512-I3n4AAbArjPAZtwCrk9MQnSrcj5+9rq8sic2rUU44fP5QaR17Vk8zDt61+R9dnP9ZRsj09aAUYML4Ash05qZjQ==
+
 accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.8:
   version "1.3.8"
   resolved "https://registry.npmmirror.com/accepts/-/accepts-1.3.8.tgz#0bf0be125b67014adcb0b0921e62db7bffe16b2e"
@@ -3690,6 +3707,11 @@ fast-levenshtein@^2.0.6:
   version "2.0.6"
   resolved "https://registry.npmmirror.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
+
+fastest-levenshtein@1.0.16:
+  version "1.0.16"
+  resolved "https://registry.npmmirror.com/fastest-levenshtein/-/fastest-levenshtein-1.0.16.tgz#210e61b6ff181de91ea9b3d1b84fdedd47e034e5"
+  integrity sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==
 
 fastq@^1.6.0:
   version "1.15.0"
