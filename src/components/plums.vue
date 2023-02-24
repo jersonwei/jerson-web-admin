@@ -4,7 +4,7 @@ import { useRafFn, useWindowSize } from '@vueuse/core'
 const r180 = Math.PI
 const r90 = Math.PI / 2
 const r15 = Math.PI / 12
-const color = '#409eff50'
+const color = 'rgba(211, 17, 240, 0.3)'
 const el = ref(null)
 const { random } = Math
 const size = reactive(useWindowSize())
@@ -121,5 +121,6 @@ onMounted(async () => {
   bottom: 0;
   left: 0;
   pointer-events: none;
+  // background-color: rgba(211, 17, 240, 0.5);
 }
 </style>

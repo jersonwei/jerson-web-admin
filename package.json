@@ -9,6 +9,7 @@
     "eslint": "eslint --ext .js,.vue src --fix"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.10",
     "@vueuse/core": "^9.13.0",
     "@zxcvbn-ts/core": "^2.2.1",
     "@zxcvbn-ts/language-common": "^2.0.1",

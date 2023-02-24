@@ -2,6 +2,7 @@
 import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
+// import { toLine } from '@/utils/toLine'
 const store = useStore()
 const formRules = {
   username: [{ required: true, message: '必须输入用户名', trigger: 'blur' }],
@@ -29,25 +30,42 @@ const handleQrCode = () => {
 const handleRegister = () => {
   store.commit('user/setCurrentState', LoginState.REGISTER)
 }
+const openGithub = () => {
+  window.location.href = 'https://github.com/jersonwei/jerson-web-admin'
+}
 const handleLogin = () => {}
 </script>
 <template>
   <div class="login-container">
     <el-form
+      class="loginForm"
       ref="formRef"
       v-show="getShow"
       :model="formData"
       :rules="formRules"
       @keypress.enter="handleLogin"
     >
+      <div style="margin-bottom: 20px;">Web 登陆</div>
       <el-form-item class="enter-x" prop="username">
+        <span class="svgComponent">
+          <el-icon>
+            <Avatar></Avatar>
+          </el-icon>
+        </span>
+        <!-- <component :is="`el-icon-${toLine('Avatar')}`"></component> -->
         <el-input
           v-model="formData.username"
           placeholder="账号"
+          :prefix-icon="'Avatar'"
           size="large"
         ></el-input>
       </el-form-item>
       <el-form-item class="enter-x" prop="password">
+        <span class="svgComponent">
+          <el-icon>
+            <Lock></Lock>
+          </el-icon>
+        </span>
         <el-input
           type="password"
           v-model="formData.password"
@@ -56,12 +74,12 @@ const handleLogin = () => {}
         ></el-input>
       </el-form-item>
       <el-row class="enter-x">
-        <el-col :span="12">
+        <el-col :span="12" class="col-form">
           <el-form-item class="enter-x" style="text-align: left;">
             <el-checkbox v-model:checked="remember">记住密码</el-checkbox>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :span="12" class="col-form">
           <el-form-item style="text-align:right" class="enter-x">
             <el-button
               style="font-size: 14px;"
@@ -112,6 +130,7 @@ const handleLogin = () => {}
           fill="currentColor"
           aria-hidden="true"
           viewBox="64 64 896 896"
+          @click="openGithub"
         >
           <path
             d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
@@ -178,28 +197,86 @@ const handleLogin = () => {}
   </div>
 </template>
 <style lang="scss" scoped>
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
+$cursor: #fff;
+$black: #000;
 .login-container {
   min-height: 100%;
   overflow: hidden;
-}
-.block {
-  width: 100%;
-}
-.dividertxt {
-  ::v-deep .el-divider__text {
-    color: #aaa;
-  }
-}
-.othersvg {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  svg {
-    cursor: pointer;
-    font-size: 22px;
-    color: #888;
-    &:hover {
-      color: #1890ff;
+  .loginForm {
+    position: relative;
+
+    ::v-deep .el-input {
+      display: inline-block;
+      input {
+        padding: 12px 5px 12px 15px;
+        height: 47px;
+        background: transparent;
+        color: $black;
+        height: 47px;
+        caret-color: $cursor;
+      }
+    }
+    ::v-deep .el-form-item {
+      position: relative;
+      border-radius: 0 4px 4px 0;
+    }
+    ::v-deep .el-form-item__content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      line-height: 32px;
+      font-size: var(--font-size);
+      min-width: 0;
+    }
+    .col-form {
+      ::v-deep .el-form-item__content {
+        display: block;
+      }
+    }
+    .svgComponent {
+      position: relative;
+      padding: 6px 10px 0px 0px;
+      color: $dark_gray;
+      vertical-align: middle;
+      display: inline-block;
+      .el-icon {
+        font-size: 20px;
+        line-height: 2em;
+      }
+    }
+    svg {
+      width: 1em;
+      height: 1em;
+      cursor: pointer;
+      color: #aaa;
+      &:hover {
+        color: #1890ff;
+      }
+    }
+    .block {
+      width: 100%;
+    }
+    .dividertxt {
+      ::v-deep .el-divider__text {
+        color: #aaa;
+      }
+    }
+    .othersvg {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      svg {
+        cursor: pointer;
+        font-size: 22px;
+        color: #888;
+        &:hover {
+          color: #1890ff;
+        }
+      }
     }
   }
 }
