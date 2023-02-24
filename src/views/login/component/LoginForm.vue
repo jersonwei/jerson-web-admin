@@ -28,8 +28,10 @@ const handleMobile = () => {
 const handleQrCode = () => {
   store.commit('user/setCurrentState', LoginState.QR_CODE)
 }
+const handleRegister = () => {
+  store.commit('user/setCurrentState', LoginState.REGISTER)
+}
 const handleLogin = () => {}
-const setLoginState = () => {}
 </script>
 <template>
   <div class="login-container">
@@ -96,7 +98,7 @@ const setLoginState = () => {}
           >
         </el-col>
         <el-col :span="7">
-          <el-button class="block" size="large" @click="setLoginState"
+          <el-button class="block" size="large" @click="handleRegister"
             >注册</el-button
           >
         </el-col>

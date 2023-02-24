@@ -4,6 +4,7 @@ import ForgetPassword from './component/ForgetPassword.vue'
 import LoginForm from './component/LoginForm.vue'
 import MobileForm from './component/MobileForm.vue'
 import QrCodeForm from './component/QrCodeForm.vue'
+import RegistForm from './component/RegistForm.vue'
 </script>
 <template>
   <div class="login">
@@ -13,6 +14,7 @@ import QrCodeForm from './component/QrCodeForm.vue'
       <ForgetPassword></ForgetPassword>
       <MobileForm></MobileForm>
       <QrCodeForm />
+      <RegistForm></RegistForm>
     </div>
   </div>
 </template>
