@@ -2,6 +2,7 @@
 import plum from '../../components/Plums.vue'
 import ForgetPassword from './component/ForgetPassword.vue'
 import LoginForm from './component/LoginForm.vue'
+import MobileForm from './component/MobileForm.vue'
 </script>
 <template>
   <div class="login">
@@ -9,6 +10,7 @@ import LoginForm from './component/LoginForm.vue'
     <div style="width: 400px">
       <LoginForm></LoginForm>
       <ForgetPassword></ForgetPassword>
+      <MobileForm></MobileForm>
     </div>
   </div>
 </template>

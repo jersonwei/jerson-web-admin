@@ -22,6 +22,9 @@ const handleForgetPassWord = () => {
   store.commit('user/setCurrentState', LoginState.RESET_PASSWORD)
   console.log(store.state.user.currentState)
 }
+const handleMobile = () => {
+  store.commit('user/setCurrentState', LoginState.MOBILE)
+}
 const handleLogin = () => {}
 const setLoginState = () => {}
 </script>
@@ -80,7 +83,7 @@ const setLoginState = () => {}
       </el-form-item>
       <el-row class="enter-x" style="justify-content: space-between;">
         <el-col :span="7">
-          <el-button class="block" size="large" @click="setLoginState"
+          <el-button class="block" size="large" @click="handleMobile"
             >手机登录</el-button
           >
         </el-col>
