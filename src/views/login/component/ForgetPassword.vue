@@ -5,7 +5,6 @@ import { ElMessage } from 'element-plus'
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 const store = useStore()
-console.log(store.state.user.currentState)
 const formRef = ref()
 const getShow = computed(
   () => store.state.user.currentState === LoginState.RESET_PASSWORD
