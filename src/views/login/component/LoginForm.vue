@@ -34,6 +34,15 @@ const handleRegister = () => {
 const openGithub = () => {
   window.location.href = 'https://github.com/jersonwei/jerson-web-admin'
 }
+// 处理密码框文本显示状态
+const passwordType = ref('password')
+const onChangePwdType = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
 const handleLogin = () => {}
 </script>
 <template>
@@ -49,12 +58,10 @@ const handleLogin = () => {}
       <div style="margin-bottom: 20px;">Web 登陆</div>
       <el-form-item class="enter-x" prop="username">
         <span class="svgComponent">
-          <!-- <el-icon>
+          <el-icon>
             <Avatar></Avatar>
-          </el-icon> -->
-          <span class="svgComponent">
-            <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon>
-          </span>
+          </el-icon>
+          <!-- <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon> -->
         </span>
         <!-- <component :is="`el-icon-${toLine('Avatar')}`"></component> -->
         <el-input
@@ -72,12 +79,18 @@ const handleLogin = () => {}
           </el-icon>
         </span>
         <el-input
-          type="password"
+          :type="passwordType"
           v-model="formData.password"
           placeholder="密码"
           name="password"
           size="large"
         ></el-input>
+        <span class="svgComponent eye">
+          <svg-icon
+            :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+            @click="onChangePwdType"
+          />
+        </span>
       </el-form-item>
       <el-row class="enter-x">
         <el-col :span="12" class="col-form">
@@ -253,6 +266,11 @@ $black: #000;
         font-size: 20px;
         line-height: 2em;
       }
+    }
+    .eye {
+      position: absolute;
+      top: 0;
+      right: 0;
     }
     svg {
       width: 1em;

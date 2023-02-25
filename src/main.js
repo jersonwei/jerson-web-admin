@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { toLine } from '@/utils/toLine'
+import installIcons from '@/icons'
 import './style/index.scss'
 import * as Icons from '@element-plus/icons-vue'
 import installElementPlus from './plugins/element'
@@ -13,6 +14,7 @@ for (const [key, component] of Object.entries(Icons)) {
 for (const [key, component] of Object.entries(Icons)) {
   app.component(key, component)
 }
+installIcons(app)
 installElementPlus(app)
 app
   .use(store)

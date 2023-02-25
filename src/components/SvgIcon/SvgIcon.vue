@@ -22,7 +22,8 @@ const styleExternalIcon = computed(() => ({
 /**
  * 内部图标
  */
-// const iconName = computed(() => `#icon-${props.icon}`)
+const iconName = computed(() => `#icon-${props.icon}`)
+console.log(iconName.value)
 </script>
 <template>
   <div
@@ -32,7 +33,7 @@ const styleExternalIcon = computed(() => ({
     :class="className"
   ></div>
   <svg v-else class="svg-icon" :class="className" aria-hidden="true">
-    <use />
+    <use :xlink:href="iconName" />
   </svg>
 </template>
 <style lang="scss" scoped>
