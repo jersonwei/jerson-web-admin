@@ -1,24 +1,48 @@
 <script setup>
 import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
-import { computed, reactive, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
+import { validateLoginFormPassword } from '../rules'
 // import { toLine } from '@/utils/toLine'
 const store = useStore()
-const formRules = {
-  username: [{ required: true, message: '必须输入用户名', trigger: 'blur' }],
-  password: [{ required: true, message: '必须输入密码', trigger: 'blur' }]
-}
+const formRules = ref({
+  username: [
+    { required: true, message: '必须输入用户名', trigger: 'blur' },
+    {
+      max: 15,
+      message: '最多15位',
+      required: true,
+      trigger: 'change'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      message: '密码为6-16位以大小写字母或数字开头',
+      trigger: 'change',
+      validator: validateLoginFormPassword()
+    }
+  ]
+})
 const formRef = ref()
 const remember = ref(true)
 const loading = ref(false)
 const getShow = computed(
   () => store.state.user.currentState === LoginState.LOGIN
 )
-const formData = reactive({
+const formData = ref({
   username: 'jersonwang',
-  password: 'admin'
+  password: 'admins'
 })
+watch(
+  () => formData.value.username,
+  val => store.commit('user/setLoginAccount', val)
+)
+watch(
+  () => store.state.user.loginAccount,
+  val => (formData.value.username = val)
+)
 const handleForgetPassWord = () => {
   store.commit('user/setCurrentState', LoginState.RESET_PASSWORD)
 }
@@ -61,8 +85,8 @@ const handleLogin = () => {}
           <el-icon>
             <Avatar></Avatar>
           </el-icon>
-          <!-- <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon> -->
         </span>
+        <!-- <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon> -->
         <!-- <component :is="`el-icon-${toLine('Avatar')}`"></component> -->
         <el-input
           v-model="formData.username"

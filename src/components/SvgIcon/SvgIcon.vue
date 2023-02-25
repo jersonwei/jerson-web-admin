@@ -23,7 +23,6 @@ const styleExternalIcon = computed(() => ({
  * 内部图标
  */
 const iconName = computed(() => `#icon-${props.icon}`)
-console.log(iconName.value)
 </script>
 <template>
   <div
