@@ -1,4 +1,4 @@
-import { login } from '@/api/sys'
+import { getUserInfo, login } from '@/api/sys'
 import { LoginState } from '@/constant/LoginState'
 import router from '@/router'
 import md5 from 'md5'
@@ -7,7 +7,8 @@ export default {
   state: () => ({
     currentState: LoginState.LOGIN,
     loginAccount: 'super-admin',
-    token: ''
+    token: '',
+    userInfo: {}
   }),
   mutations: {
     setCurrentState (state, val) {
@@ -18,6 +19,9 @@ export default {
     },
     setToken (state, val) {
       state.token = val
+    },
+    setUserInfo (state, val) {
+      state.userInfo = val
     }
   },
   actions: {
@@ -36,6 +40,12 @@ export default {
             reject(err)
           })
       })
+    },
+    async getUserInfo (context) {
+      const res = await getUserInfo()
+      console.log(res)
+      this.commit('user/setUserInfo', res)
+      return res
     }
   },
   getters: {

@@ -10,3 +10,11 @@ export const login = data => {
     data
   })
 }
+/**
+ * 用户信息
+ */
+export const getUserInfo = () => {
+  return requeset({
+    url: '/sys/profile'
+  })
+}
