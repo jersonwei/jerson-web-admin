@@ -1,5 +1,6 @@
+import { login } from '@/api/sys'
 import { LoginState } from '@/constant/LoginState'
-
+import md5 from 'md5'
 export default {
   namespaced: true,
   state: () => ({
@@ -14,7 +15,23 @@ export default {
       state.loginAccount = val
     }
   },
-  actions: {},
+  actions: {
+    login (context, userInfo) {
+      const { username, password } = userInfo
+      return new Promise((resolve, reject) => {
+        login({
+          username,
+          password: md5(password)
+        })
+          .then(data => {
+            resolve(data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    }
+  },
   getters: {
     getLoginAccount: state => state.loginAccount
   }
