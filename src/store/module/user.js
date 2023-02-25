@@ -1,6 +1,7 @@
 import { getUserInfo, login } from '@/api/sys'
 import { LoginState } from '@/constant/LoginState'
 import router from '@/router'
+import { setLogTimeStamp } from '@/utils/auth'
 import md5 from 'md5'
 export default {
   namespaced: true,
@@ -33,8 +34,9 @@ export default {
           password: md5(password)
         })
           .then(data => {
-            resolve(data)
             router.push('/')
+            setLogTimeStamp()
+            resolve(data)
           })
           .catch(err => {
             reject(err)
@@ -45,6 +47,12 @@ export default {
       const res = await getUserInfo()
       this.commit('user/setUserInfo', res)
       return res
+    },
+    logout () {
+      this.commit('user/setToken', '')
+      this.commit('user/setUserInfo', {})
+      console.log(this.state)
+      router.push('/login')
     }
   },
   getters: {

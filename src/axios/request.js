@@ -1,4 +1,5 @@
 import store from '@/store'
+import { isTokenTimeOut } from '@/utils/auth'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
@@ -11,6 +12,11 @@ service.interceptors.request.use(
   config => {
     config.headers.icode = '46B98050A4A2A49B'
     if (store.getters.token) {
+      if (isTokenTimeOut()) {
+        // token超时
+        store.dispatch('user/logout')
+        return Promise.reject(new Error('token超时'))
+      }
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
     return config
@@ -27,6 +33,9 @@ service.interceptors.response.use(
     return Promise.reject(new Error(message))
   },
   err => {
+    if (err.response && err.response.data && err.response.data.code === 401) {
+      store.dispatch('user/logout')
+    }
     return Promise.reject(err)
   }
 )

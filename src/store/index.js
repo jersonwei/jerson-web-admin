@@ -3,6 +3,7 @@ import user from './module/user'
 import createPersistedState from 'vuex-persistedstate'
 import register from './module/register'
 import getters from './getter'
+import time from './module/time'
 export default createStore({
   getters,
   state: {},
@@ -10,7 +11,8 @@ export default createStore({
   actions: {},
   modules: {
     user,
-    register
+    register,
+    time
   },
   plugins: [createPersistedState()]
 })

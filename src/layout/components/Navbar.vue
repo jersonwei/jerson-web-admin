@@ -22,7 +22,7 @@
             >
               <el-dropdown-item>仓库地址</el-dropdown-item>
             </a>
-            <el-dropdown-item divided>
+            <el-dropdown-item divided @click="handleLogOut">
               退出登录
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -33,8 +33,12 @@
 </template>
 
 <script setup>
-import {} from 'vue'
+import { useStore } from 'vuex'
+const store = useStore()
 const avatar = require('../../assets/ailun.jpeg')
+const handleLogOut = () => {
+  store.dispatch('user/logout')
+}
 </script>
 
 <style lang="scss" scoped>
