@@ -1,5 +1,6 @@
 <script setup>
 import SvgIcon from '@/components/SvgIcon/SvgIcon.vue'
+import { ElMessage } from 'element-plus'
 import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
@@ -32,8 +33,8 @@ const getShow = computed(
   () => store.state.user.currentState === LoginState.LOGIN
 )
 const formData = ref({
-  username: 'jersonwang',
-  password: 'admins'
+  username: 'super-admin',
+  password: '123456'
 })
 watch(
   () => formData.value.username,
@@ -67,7 +68,27 @@ const onChangePwdType = () => {
     passwordType.value = 'password'
   }
 }
-const handleLogin = () => {}
+// 登录
+const handleLogin = () => {
+  formRef.value.validate(valid => {
+    if (!valid) {
+      ElMessage.error('表单验证失败')
+    }
+    loading.value = true
+    store
+      .dispatch('user/login', formData.value)
+      .then(res => {
+        loading.value = true
+        console.log(res)
+      })
+      .catch(err => {
+        console.dir(err)
+      })
+      .finally(() => {
+        loading.value = false
+      })
+  })
+}
 </script>
 <template>
   <div class="login-container">

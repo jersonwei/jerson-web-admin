@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: () => ({
     currentState: LoginState.LOGIN,
-    loginAccount: 'jersonwang'
+    loginAccount: 'super-admin'
   }),
   mutations: {
     setCurrentState (state, val) {
@@ -24,7 +24,7 @@ export default {
           password: md5(password)
         })
           .then(data => {
-            resolve(data)
+            resolve()
           })
           .catch(err => {
             reject(err)

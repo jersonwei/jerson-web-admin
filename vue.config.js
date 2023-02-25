@@ -23,5 +23,13 @@ module.exports = defineConfig({
       })
       .end()
   },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://api.imooc-admin.lgdsunday.club/',
+        changeOrigin: true
+      }
+    }
+  },
   transpileDependencies: true
 })
