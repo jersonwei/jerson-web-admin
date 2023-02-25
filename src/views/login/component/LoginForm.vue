@@ -79,7 +79,7 @@ const handleLogin = () => {
       .dispatch('user/login', formData.value)
       .then(res => {
         loading.value = true
-        console.log(res)
+        store.commit('user/setToken', res.token)
       })
       .catch(err => {
         console.dir(err)
