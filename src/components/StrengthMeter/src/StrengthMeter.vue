@@ -9,6 +9,8 @@ import {
   defineProps,
   defineEmits
 } from 'vue'
+import { useStore } from 'vuex'
+const store = useStore()
 const props = defineProps({
   value: {
     type: String,
@@ -43,17 +45,26 @@ watchEffect(() => {
 watch(
   () => unref(innerValueRef),
   val => {
+    store.commit('register/setRegisterPwd', val)
     emits('change', val)
   }
 )
+// 处理密码框文本显示状态
+const passwordType = ref('text')
+const onChangePwdType = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
 </script>
 <template>
   <div class="strength-meter">
     <el-input
-      type="password"
+      :type="passwordType"
       v-if="showInput"
       v-bind="$attrs"
-      clearable
       v-model="innerValueRef"
       :disabled="disabled"
       @change.enter="innerValueRef = $event.target.value"
@@ -67,6 +78,12 @@ watch(
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </el-input>
+    <span class="svgComponent eye">
+      <svg-icon
+        :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+        @click="onChangePwdType"
+      />
+    </span>
     <div class="strength-meter-bar">
       <div
         class="strength-meter-bar--fill"
@@ -139,6 +156,18 @@ $success-color: #55d187;
         background-color: $success-color;
       }
     }
+  }
+}
+.eye {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+  color: #aaa;
+  &:hover {
+    color: #1890ff;
   }
 }
 </style>

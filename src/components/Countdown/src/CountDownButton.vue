@@ -1,6 +1,6 @@
 <script setup>
 import { isFunction } from '@/utils/is'
-import { computed, ref, unref, defineProps } from 'vue'
+import { computed, ref, unref, defineProps, defineEmits } from 'vue'
 const props = defineProps({
   count: {
     type: Number,
@@ -11,6 +11,7 @@ const props = defineProps({
     default: null
   }
 })
+const emits = defineEmits(['getSms', 'resetSms'])
 const loading = ref(false)
 function useCountdown (count) {
   const currentCount = ref(count)
@@ -26,6 +27,7 @@ function useCountdown (count) {
     isStart.value = false
     clear()
     timerId = null
+    emits('resetSms')
   }
 
   function start () {
@@ -74,6 +76,7 @@ const getButtonText = computed(() =>
 )
 async function handleStart () {
   const { beforeStartFunc } = props
+  emits('getSms')
   if (beforeStartFunc && isFunction(beforeStartFunc)) {
     loading.value = true
     try {

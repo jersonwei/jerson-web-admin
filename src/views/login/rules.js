@@ -1,3 +1,5 @@
+import { useStore } from 'vuex'
+const store = useStore()
 export const validateLoginFormPassword = () => {
   return (rule, value, callback) => {
     // eslint-disable-next-line
@@ -16,6 +18,18 @@ export const validateMobileNumber = () => {
     const pattern = /^1[3-9]\d{9}$/
     if (!pattern.test(val)) {
       callback(new Error('请输入合法手机号'))
+    } else {
+      callback()
+    }
+  }
+}
+
+export const validateRegistFormRePassword = () => {
+  const pwd = store.state.register.registerPwd
+  return (rule, value, callback) => {
+    console.log(value)
+    if (value !== pwd) {
+      callback(new Error('与密码不一致'))
     } else {
       callback()
     }

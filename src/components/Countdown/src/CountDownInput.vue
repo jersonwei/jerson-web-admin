@@ -1,6 +1,6 @@
 <script setup>
 import CountDownButton from './CountDownButton.vue'
-import { defineProps } from 'vue'
+import { defineProps, ref } from 'vue'
 defineProps({
   size: {
     type: String,
@@ -15,11 +15,18 @@ defineProps({
     default: null
   }
 })
+const haveSms = ref(true)
+const handleGetSms = () => {
+  haveSms.value = !haveSms.value
+}
 </script>
 <template>
-  <el-input class="count-down" v-bind="$attrs" :size="size"> </el-input>
+  <el-input :disabled="haveSms" class="count-down" v-bind="$attrs" :size="size">
+  </el-input>
   <CountDownButton
     :size="size"
+    @getSms="handleGetSms"
+    @resetSms="haveSms = true"
     :count="count"
     :beforeStartFunc="sendCodeApi"
   ></CountDownButton>
