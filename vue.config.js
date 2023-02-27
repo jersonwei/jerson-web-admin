@@ -8,8 +8,13 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       scss: {
-        additionalData: '@import "~@/style/variable.module.scss";'
+        // additionalData: '@import "~@/style/variable.module.scss";'
       }
+    }
+  },
+  configureWebpack: {
+    resolve: {
+      fallback: { path: require.resolve('path-browserify') }
     }
   },
   chainWebpack (config) {

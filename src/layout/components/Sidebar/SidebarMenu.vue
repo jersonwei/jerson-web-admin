@@ -1,4 +1,15 @@
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router'
+import { filterRoutes, generateMenus } from '@/utils/route'
+import { computed } from 'vue'
+const routes = computed(() => {
+  const filterRoute = filterRoutes(router.getRoutes())
+  console.log(filterRoute)
+  return generateMenus(filterRoute)
+})
+const router = useRouter()
+console.log(routes)
+</script>
 <template>
   <!-- 一级 menu 菜单 -->
   <el-menu
