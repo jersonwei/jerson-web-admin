@@ -1,4 +1,8 @@
 import path from 'path'
+
+/**
+ * 返回所有子路由
+ */
 const getChildrenRoutes = routes => {
   const result = []
   routes.forEach(route => {
@@ -8,16 +12,12 @@ const getChildrenRoutes = routes => {
   })
   return result
 }
-function isNull (data) {
-  return !data || JSON.stringify(data) === '{}' || JSON.stringify(data === '[]')
-}
 /**
- * 处理脱离层级的路由
+ * 处理脱离层级的路由：某个一级路由为其他子路由，则剔除该一级路由，保留路由层级
+ * @param {*} routes router.getRoutes()
  */
-export const filterRoutes = routes => {
-  // 处理所有子集路由
+export const filterRouters = routes => {
   const childrenRoutes = getChildrenRoutes(routes)
-  // 去掉重复路由
   return routes.filter(route => {
     return !childrenRoutes.find(childrenRoute => {
       return childrenRoute.path === route.path
@@ -26,42 +26,54 @@ export const filterRoutes = routes => {
 }
 
 /**
- * 根据routes数据 返回对应的menu数据
+ * 判断数据是否为空值
  */
-export const generateMenus = (routes, basePath = '') => {
+function isNull (data) {
+  if (!data) return true
+  if (JSON.stringify(data) === '{}') return true
+  if (JSON.stringify(data) === '[]') return true
+  return false
+}
+/**
+ * 根据 routes 数据，返回对应 menu 规则数组
+ */
+export function generateMenus (routes, basePath = '') {
   const result = []
-  // 不满足meta meta.title meta.icon条件 直接跳过
+  // 遍历路由表
   routes.forEach(item => {
-    // 不存在children或者不存在meta return
-    if (isNull(item.children) && isNull(item.meta)) return
-    // 存在children 不存在meta 继续判断
+    // 不存在 children && 不存在 meta 直接 return
+    if (isNull(item.meta) && isNull(item.children)) return
+    // 存在 children 不存在 meta，进入迭代
     if (isNull(item.meta) && !isNull(item.children)) {
       result.push(...generateMenus(item.children))
       return
     }
-    // 不存在children 存在meta || 存在meta和children
-    // 使用path获取路由跳转路径
+    // 合并 path 作为跳转路径
     const routePath = path.resolve(basePath, item.path)
-    // 路由分离后可能存在同名路由情况
+    // 路由分离之后，存在同名父路由的情况，需要单独处理
     let route = result.find(item => item.path === routePath)
-    // 当前路由尚未加入到result
     if (!route) {
       route = {
         ...item,
         path: routePath,
         children: []
       }
-      // icon&&title
+
+      // icon 与 title 必须全部存在
       if (route.meta.icon && route.meta.title) {
+        // meta 存在生成 route 对象，放入 arr
         result.push(route)
       }
     }
-    if (!isNull(item.children)) {
+
+    // 存在 children 进入迭代到children
+    if (item.children) {
       route.children.push(...generateMenus(item.children, route.path))
     }
   })
   return result
 }
+
 /**
  *根据routes数据返回对应的menu规则数据
  */
