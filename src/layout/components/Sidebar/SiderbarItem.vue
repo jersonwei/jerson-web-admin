@@ -1,13 +1,12 @@
 <script setup>
 import { defineProps } from 'vue'
 import MenuItem from './MenuItem.vue'
-const props = defineProps({
+defineProps({
   route: {
     type: Object,
     required: true
   }
 })
-console.log(props)
 </script>
 <template>
   <el-submenu v-if="route.children.length" :index="route.path">

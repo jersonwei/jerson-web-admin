@@ -10,7 +10,6 @@ const props = defineProps({
     required: true
   }
 })
-console.log(props)
 </script>
 <template>
   <i v-if="icon.includes('el-icon')" class="sub-el-icon" :class="icon"></i>

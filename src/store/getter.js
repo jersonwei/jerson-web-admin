@@ -6,6 +6,6 @@ const getters = {
     return JSON.stringify(state.user.userInfo) !== '{}'
   },
   cssVar: state => variable,
-  siderBarOpen: state => state.app.siderBarOpen
+  sideBarOpen: state => state.app.sideBarOpen
 }
 export default getters

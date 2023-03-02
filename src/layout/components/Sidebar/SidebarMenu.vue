@@ -5,15 +5,14 @@ import { computed } from 'vue'
 import SiderbarItem from './SiderbarItem.vue'
 const routes = computed(() => {
   const filterRoute = filterRouters(router.getRoutes())
-  console.log(router.getRoutes(), filterRoute)
   return generateMenus(filterRoute)
 })
 const router = useRouter()
-console.log(routes)
 </script>
 <template>
   <!-- 一级 menu 菜单 -->
   <el-menu
+    :collapse="!$store.getters.sideBarOpen"
     :uniqueOpened="true"
     default-active="2"
     :background-color="$store.getters.cssVar.menuBg"
@@ -28,4 +27,13 @@ console.log(routes)
     ></SiderbarItem>
   </el-menu>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.hideSidebar {
+  .el-menu-item,
+  .el-sub-menu__title {
+    padding: 0px !important;
+
+    padding-left: 20px !important;
+  }
+}
+</style>

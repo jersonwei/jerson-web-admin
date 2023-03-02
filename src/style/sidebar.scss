@@ -65,7 +65,10 @@
       height: 100%;
       width: 100% !important;
     }
-
+    .el-menu-item,
+    .el-submenu{
+      text-align: left;
+    }
     .is-active > .el-submenu__title {
       color: $subMenuActiveText !important;
     }
@@ -136,7 +139,10 @@
       }
     }
   }
-
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
   .el-menu--collapse .el-menu .el-submenu {
     min-width: $sideBarWidth !important;
   }

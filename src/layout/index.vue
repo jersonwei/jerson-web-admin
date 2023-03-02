@@ -5,7 +5,10 @@ import AppMain from './components/AppMain'
 import variable from '@/style/variable.module.scss'
 </script>
 <template>
-  <div class="app-wrapper">
+  <div
+    class="app-wrapper"
+    :class="[$store.getters.sideBarOpen ? 'openSidebar' : 'hideSidebar']"
+  >
     <!-- 左侧 menu -->
     <sidebar
       id="guide-sidebar"
@@ -26,6 +29,7 @@ import variable from '@/style/variable.module.scss'
 @import '~@/style/mixin.scss';
 // @import '~@/style/variable.module.scss';
 $sideBarWidth: 210px;
+$hideSideBarWidth: 54px;
 .app-wrapper {
   @include clearfix;
   position: relative;
@@ -39,5 +43,11 @@ $sideBarWidth: 210px;
   right: 0;
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
+  transition: width 0.28s;
+}
+.hideSidebar .fixed-header {
+  width: calc(100% - #{$hideSideBarWidth});
+}
+.openSidebar {
 }
 </style>
