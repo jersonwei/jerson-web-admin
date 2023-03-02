@@ -30,6 +30,7 @@ import variable from '@/style/variable.module.scss'
 // @import '~@/style/variable.module.scss';
 $sideBarWidth: 210px;
 $hideSideBarWidth: 54px;
+$sideBarDuration: 0.28s;
 .app-wrapper {
   @include clearfix;
   position: relative;
@@ -43,11 +44,9 @@ $hideSideBarWidth: 54px;
   right: 0;
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
-  transition: width 0.28s;
+  transition: width #{$sideBarDuration};
 }
 .hideSidebar .fixed-header {
   width: calc(100% - #{$hideSideBarWidth});
-}
-.openSidebar {
 }
 </style>

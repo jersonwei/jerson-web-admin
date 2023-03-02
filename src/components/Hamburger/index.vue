@@ -7,7 +7,6 @@ const icon = computed(() => {
 })
 const toggleClick = () => {
   store.commit('app/setSiderBarState')
-  console.log(store.getters.sideBarOpen)
 }
 </script>
 <template>
