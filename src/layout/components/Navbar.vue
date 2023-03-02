@@ -2,6 +2,10 @@
   <div class="navbar">
     <hamburger class="hamburger-container"></hamburger>
     <bread-crumb class="breadcrumb-container"></bread-crumb>
+    <lang-select
+      effect="dark"
+      class="right-menu-item hover-effect"
+    ></lang-select>
     <div class="right-menu">
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
@@ -38,6 +42,7 @@
 import { useStore } from 'vuex'
 import hamburger from '@/components/Hamburger/index.vue'
 import breadCrumb from '@/components/Breadcrumb/index.vue'
+import LangSelect from '@/components/LangSelect/index.vue'
 const store = useStore()
 const avatar = require('../../assets/ailun.jpeg')
 const handleLogOut = () => {
@@ -93,6 +98,20 @@ const handleLogOut = () => {
           }
         }
       }
+    }
+  }
+  ::v-deep .right-menu-item {
+    display: inline-block;
+    padding: 0 18px 0 0;
+    font-size: 28px;
+    position: absolute;
+    right: 80px;
+    top: 15px;
+    color: #5a5e66;
+    vertical-align: text-bottom;
+
+    &.hover-effect {
+      cursor: pointer;
     }
   }
 }
