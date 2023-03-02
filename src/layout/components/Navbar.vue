@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <hamburger class="hamburger-container"></hamburger>
+    <bread-crumb class="breadcrumb-container"></bread-crumb>
     <div class="right-menu">
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
@@ -36,6 +37,7 @@
 <script setup>
 import { useStore } from 'vuex'
 import hamburger from '@/components/Hamburger/index.vue'
+import breadCrumb from '@/components/Breadcrumb/index.vue'
 const store = useStore()
 const avatar = require('../../assets/ailun.jpeg')
 const handleLogOut = () => {
