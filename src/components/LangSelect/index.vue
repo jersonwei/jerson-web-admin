@@ -24,7 +24,7 @@ const selectLang = lang => {
 <template>
   <el-dropdown class="inernation" trigger="click" @command="selectLang">
     <div>
-      <el-tooltip content="国际化" :effect="effect">
+      <el-tooltip :content="$t('msg.navBar.lang')" :effect="effect">
         <svg-icon icon="language"></svg-icon>
       </el-tooltip>
     </div>

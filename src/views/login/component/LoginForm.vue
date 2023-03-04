@@ -5,14 +5,21 @@ import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
 import { validateLoginFormPassword } from '../rules'
+import { useI18n } from 'vue-i18n'
+import LangSelect from '@/components/LangSelect/index.vue'
 // import { toLine } from '@/utils/toLine'
 const store = useStore()
+const { t } = useI18n()
 const formRules = ref({
   username: [
-    { required: true, message: '必须输入用户名', trigger: 'blur' },
+    {
+      required: true,
+      message: t('msg.toast.accountRequired'),
+      trigger: 'blur'
+    },
     {
       max: 15,
-      message: '最多15位',
+      message: t('msg.toast.accountMaxCount'),
       required: true,
       trigger: 'change'
     }
@@ -20,7 +27,7 @@ const formRules = ref({
   password: [
     {
       required: true,
-      message: '密码为6-16位以大小写字母或数字开头',
+      message: t('msg.toast.pwdRulesTip'),
       trigger: 'change',
       validator: validateLoginFormPassword()
     }
@@ -72,7 +79,7 @@ const onChangePwdType = () => {
 const handleLogin = () => {
   formRef.value.validate(valid => {
     if (!valid) {
-      ElMessage.error('表单验证失败')
+      ElMessage.error(t('msg.toast.formVerifyError'))
     }
     loading.value = true
     store
@@ -100,7 +107,13 @@ const handleLogin = () => {
       :rules="formRules"
       @keypress.enter="handleLogin"
     >
-      <div style="margin-bottom: 20px;">{{ $t('msg.login.title') }}</div>
+      <div style="margin-bottom: 20px;" class="title-container">
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <lang-select
+          effect="dark"
+          class="right-menu-item hover-effect"
+        ></lang-select>
+      </div>
       <el-form-item class="enter-x" prop="username">
         <span class="svgComponent">
           <el-icon>
@@ -275,7 +288,24 @@ $black: #000;
   overflow: hidden;
   .loginForm {
     position: relative;
+    .title-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      ::v-deep .right-menu-item {
+        display: inline-block;
+        font-size: 28px;
+        position: absolute;
+        right: 0px;
+        top: 5px;
+        color: #5a5e66;
+        vertical-align: text-bottom;
 
+        &.hover-effect {
+          cursor: pointer;
+        }
+      }
+    }
     ::v-deep .el-input {
       display: inline-block;
       input {

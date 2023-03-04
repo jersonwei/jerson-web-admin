@@ -53,10 +53,13 @@ export default {
     switchLangSuccess: 'Switch Language Success',
     accountRequired: 'Account Is Required',
     phoneRulesToast: 'Please Enter Valid Phone Number',
+    pwdRulesTip:
+      'Password Is 6-16 Digits Starting With Upper/Lowercase Letters Or Numbers',
     pwdNotMatch: 'Does Not Match The Pwd',
     accountMaxCount: 'Up To 15 Digits',
     notSupportRegist: 'Account Registration Is Not Currently Supported～',
-    notSupportPhoneLog: 'Mobile Login Is Not Supported For Now~'
+    notSupportPhoneLog: 'Mobile Login Is Not Supported For Now~',
+    formVerifyError: 'Form Validation Failed'
   },
   tagsView: {
     refresh: 'Refresh',
@@ -77,6 +80,7 @@ export default {
     screenfull: 'Full Screen Replacement',
     lang: 'Globalization',
     guide: 'Function Guide',
+    repoSite: 'repo address',
     home: 'Home',
     course: 'Course homepage',
     logout: 'Log out'

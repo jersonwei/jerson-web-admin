@@ -53,10 +53,12 @@ export default {
     switchLangSuccess: '切换语言成功',
     accountRequired: '必须输入用户名',
     phoneRulesToast: '请输入合法手机号',
+    pwdRulesTip: '密码为6-16位以大小写字母或数字开头',
     pwdNotMatch: '与密码不一致',
     accountMaxCount: '最多15位',
     notSupportRegist: '暂不支持注册账号～',
-    notSupportPhoneLog: '暂不支持手机登陆～'
+    notSupportPhoneLog: '暂不支持手机登陆～',
+    formVerifyError: '表单验证失败'
   },
   tagsView: {
     refresh: '刷新',
@@ -76,6 +78,7 @@ export default {
     headerSearch: '页面搜索',
     screenfull: '全屏替换',
     lang: '国际化',
+    repoSite: '仓库地址',
     guide: '功能引导',
     home: '首页',
     course: '课程主页',
