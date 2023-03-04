@@ -2,6 +2,7 @@
   <div class="navbar">
     <hamburger class="hamburger-container"></hamburger>
     <bread-crumb class="breadcrumb-container"></bread-crumb>
+    <ThemeSelect class="right-menu-item theme hover-effect"></ThemeSelect>
     <lang-select
       effect="dark"
       class="right-menu-item hover-effect"
@@ -45,6 +46,7 @@ import { useStore } from 'vuex'
 import hamburger from '@/components/Hamburger/index.vue'
 import breadCrumb from '@/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
+import ThemeSelect from '@/components/ThemeSelect/index.vue'
 const store = useStore()
 const avatar = require('../../assets/ailun.jpeg')
 const handleLogOut = () => {
@@ -114,6 +116,9 @@ const handleLogOut = () => {
 
     &.hover-effect {
       cursor: pointer;
+    }
+    &.theme {
+      right: 120px;
     }
   }
 }
