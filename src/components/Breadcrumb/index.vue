@@ -7,11 +7,11 @@
       >
         <!-- 不可点击项 -->
         <span v-if="index === breadcrumData.length - 1" class="no-redirect">{{
-          item.meta.title
+          generateI18nTitle(item.meta.title)
         }}</span>
         <!-- 可点击项 -->
         <a v-else class="redirect" @click.prevent="onLinkClick(item)">{{
-          item.meta.title
+          generateI18nTitle(item.meta.title)
         }}</a>
       </el-breadcrumb-item>
     </transition-group>
@@ -20,6 +20,7 @@
 
 <script setup>
 import router from '@/router'
+import { generateI18nTitle } from '@/utils/i18n'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
@@ -29,13 +30,11 @@ const getBreadcrumDta = () => {
   breadcrumData.value = route.matched.filter(
     item => item.meta && item.meta.title
   )
-  console.log(breadcrumData.value)
 }
 const store = useStore()
 // eslint-disable-next-line
 const linkHoverColor = ref(store.getters.cssVar.menuBg)
 const onLinkClick = item => {
-  console.log(item)
   router.push(item.path)
 }
 watch(route, () => getBreadcrumDta(), { immediate: true })

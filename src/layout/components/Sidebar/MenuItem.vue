@@ -1,5 +1,7 @@
 <script setup>
+import { generateI18nTitle } from '@/utils/i18n'
 import { defineProps } from 'vue'
+
 const props = defineProps({
   title: {
     type: String,
@@ -14,6 +16,6 @@ const props = defineProps({
 <template>
   <i v-if="icon.includes('el-icon')" class="sub-el-icon" :class="icon"></i>
   <svg-icon v-else :icon="icon"></svg-icon>
-  <span>{{ props.title }}</span>
+  <span>{{ generateI18nTitle(props.title) }}</span>
 </template>
 <style lang="scss" scoped></style>
