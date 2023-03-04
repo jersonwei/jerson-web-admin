@@ -1,10 +1,11 @@
-import { LANG } from '@/constant/LoginState'
+import { LANG, TAGS_VIEW } from '@/constant/LoginState'
 
 export default {
   namespaced: true,
   state: () => ({
     sideBarOpen: true,
-    language: localStorage.getItem(LANG) || 'zh'
+    language: localStorage.getItem(LANG) || 'zh',
+    tagsViewList: localStorage.getItem(TAGS_VIEW) || []
   }),
   mutations: {
     setSiderBarState (state, val) {
@@ -13,6 +14,15 @@ export default {
     setLanguage (state, val) {
       localStorage.setItem(LANG, val)
       state.language = val
+    },
+    addTagsViewList (state, tag) {
+      const isFind = state.tagsViewList.find(item => {
+        return item.path === tag.path
+      })
+      if (!isFind) {
+        state.tagsViewList.push(tag)
+        localStorage.setItem(TAGS_VIEW, state.tagsViewList)
+      }
     }
   },
   actions: {},
