@@ -5,7 +5,46 @@
 </template>
 
 <script setup>
-import {} from 'vue'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { isTags } from '@/utils/tags'
+import { useStore } from 'vuex'
+import { generateI18nTitle } from '@/utils/i18n'
+/**
+ * 生成title
+ */
+const getTitle = route => {
+  let title = ''
+  if (!route.meta) {
+    const pathArr = route.path.split('/')
+    title = pathArr[pathArr.length - 1]
+  } else {
+    title = generateI18nTitle(route.meta.title)
+  }
+  return title
+}
+const route = useRoute()
+const store = useStore()
+watch(
+  route,
+  (to, from) => {
+    console.log(to, from)
+    if (!isTags(to.path)) return
+    const { fullPath, meta, name, params, path, query } = to
+    store.commit('app/addTagsViewList', {
+      fullPath,
+      meta,
+      name,
+      params,
+      path,
+      query,
+      title: getTitle(to)
+    })
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped>
