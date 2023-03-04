@@ -5,12 +5,14 @@ import { LoginState } from '@/constant/LoginState'
 import { ElMessage } from 'element-plus'
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
 import {
   validateLoginFormPassword,
   validateMobileNumber
   // validateRegistFormRePassword
 } from '../rules'
 const store = useStore()
+const { t } = useI18n()
 const getShow = computed(
   () => store.state.user.currentState === LoginState.REGISTER
 )
@@ -27,7 +29,7 @@ const validateRegistFormRePassword = () => {
   // const pwd = store.state.register.registerPwd
   return (rule, value, callback) => {
     if (formData.value.confirmPassword !== formData.value.password) {
-      callback(new Error('与密码不一致'))
+      callback(new Error(t('msg.toast.pwdNotMatch')))
     } else {
       callback()
     }
@@ -35,10 +37,14 @@ const validateRegistFormRePassword = () => {
 }
 const registFormRules = ref({
   username: [
-    { required: true, message: '必须输入用户名', trigger: 'blur' },
+    {
+      required: true,
+      message: `${t('msg.toast.accountRequired')}`,
+      trigger: 'blur'
+    },
     {
       max: 15,
-      message: '最多15位',
+      message: `${t('msg.toast.accountMaxCount')}`,
       required: true,
       trigger: 'change'
     }
@@ -62,14 +68,14 @@ const registFormRules = ref({
   mobile: [
     {
       required: true,
-      message: '请输入合法手机号',
+      message: t('msg.toast.phoneRulesToast'),
       trigger: 'change',
       validator: validateMobileNumber()
     }
   ]
 })
 const handleRegister = () => {
-  ElMessage.warning('暂不支持注册账号～')
+  ElMessage.warning(t('msg.toast.notSupportRegist'))
 }
 const handleBackLogin = () => {
   store.commit('user/setCurrentState', LoginState.LOGIN)
@@ -99,7 +105,7 @@ const handlePwdChange = val => {
       </span>
       <el-input
         v-model="formData.username"
-        placeholder="账号"
+        :placeholder="$t('msg.login.acountPlaceholder')"
         size="large"
       ></el-input>
     </el-form-item>
@@ -111,7 +117,7 @@ const handlePwdChange = val => {
       </span>
       <el-input
         v-model="formData.mobile"
-        placeholder="手机号"
+        :placeholder="$t('msg.login.phonePlaceholder')"
         size="large"
       ></el-input>
     </el-form-item>
@@ -122,7 +128,7 @@ const handlePwdChange = val => {
       <CountDownInput
         v-model="formData.sms"
         size="large"
-        placeholder="短信验证码"
+        :placeholder="$t('msg.login.verifyCode')"
       ></CountDownInput>
     </el-form-item>
     <el-form-item class="enter-x" prop="password">
@@ -132,7 +138,7 @@ const handlePwdChange = val => {
         @score-change="handleScoreChange"
         @change="handlePwdChange"
         size="large"
-        placeholder="密码"
+        :placeholder="$t('msg.login.pwdPlaceholder')"
       ></StrengthMeter>
     </el-form-item>
     <el-form-item class="enter-x" prop="confirmPassword">
@@ -140,7 +146,7 @@ const handlePwdChange = val => {
         type="password"
         v-model="formData.confirmPassword"
         size="large"
-        placeholder="确认密码"
+        :placeholder="$t('msg.login.rePwdPlaceholder')"
       ></el-input>
     </el-form-item>
     <el-form-item class="enter-x">
@@ -151,12 +157,12 @@ const handlePwdChange = val => {
         :loading="loading"
         @click="handleRegister"
       >
-        注册</el-button
+        {{ $t('msg.login.register') }}</el-button
       >
     </el-form-item>
     <el-form-item class="enter-x">
       <el-button style="width: 100%;" size="large" @click="handleBackLogin">
-        返回
+        {{ $t('msg.login.return') }}
       </el-button>
     </el-form-item>
   </el-form>

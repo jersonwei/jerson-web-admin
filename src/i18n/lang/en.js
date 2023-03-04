@@ -1,7 +1,23 @@
 export default {
   login: {
     title: 'User Login',
+    mobileLog: 'Phone Log',
+    acountPlaceholder: 'Please Input Account',
+    pwdPlaceholder: 'Please Input Pwd',
+    rePwdPlaceholder: 'Please Confirm Password',
+    phonePlaceholder: 'Please Input PhoneNumber',
+    verifyCode: 'Please Input Code',
+    verification: 'Verification Code',
+    verifiBtnCodeTxt: 'Seconds To Reacquire',
+    remPwd: 'Remenber Pwd',
+    qrcodeTip: 'Login After Scanning',
     loginBtn: 'Login',
+    qrcodeLog: 'Scan Log',
+    register: 'Registered',
+    reset: 'Reset',
+    return: 'Return',
+    otherLogtype: 'Other Log Method',
+    forgetPwd: 'Forget Pwd',
     usernameRule: 'Username is required',
     passwordRule: 'Password cannot be less than 6 digits',
     desc: `
@@ -34,7 +50,13 @@ export default {
     articleEditor: 'ArticleEditor'
   },
   toast: {
-    switchLangSuccess: 'Switch Language Success'
+    switchLangSuccess: 'Switch Language Success',
+    accountRequired: 'Account Is Required',
+    phoneRulesToast: 'Please Enter Valid Phone Number',
+    pwdNotMatch: 'Does Not Match The Pwd',
+    accountMaxCount: 'Up To 15 Digits',
+    notSupportRegist: 'Account Registration Is Not Currently Supported～',
+    notSupportPhoneLog: 'Mobile Login Is Not Supported For Now~'
   },
   tagsView: {
     refresh: 'Refresh',

@@ -20,15 +20,15 @@ const handleBackLogin = () => {
         :width="400"
       /> -->
       <img :src="qrCodeUrl" alt="" class="qrimg" />
-      <el-divider class="enter-x" style="color:#aaa;font-size: 12px;"
-        >扫码后点击”确认“，即可登陆</el-divider
-      >
+      <el-divider class="enter-x" style="color:#aaa;font-size: 12px;">{{
+        $t('msg.login.qrcodeTip')
+      }}</el-divider>
       <el-button
         size="large"
         style="width: 100%;"
         class="enter-x"
         @click="handleBackLogin"
-        >返回</el-button
+        >{{ $t('msg.login.return') }}</el-button
       >
     </div>
   </template>

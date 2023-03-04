@@ -100,7 +100,7 @@ const handleLogin = () => {
       :rules="formRules"
       @keypress.enter="handleLogin"
     >
-      <div style="margin-bottom: 20px;">Web 登陆</div>
+      <div style="margin-bottom: 20px;">{{ $t('msg.login.title') }}</div>
       <el-form-item class="enter-x" prop="username">
         <span class="svgComponent">
           <el-icon>
@@ -111,7 +111,7 @@ const handleLogin = () => {
         <!-- <component :is="`el-icon-${toLine('Avatar')}`"></component> -->
         <el-input
           v-model="formData.username"
-          placeholder="账号"
+          :placeholder="$t('msg.login.acountPlaceholder')"
           :prefix-icon="'Avatar'"
           name="username"
           size="large"
@@ -126,7 +126,7 @@ const handleLogin = () => {
         <el-input
           :type="passwordType"
           v-model="formData.password"
-          placeholder="密码"
+          :placeholder="$t('msg.login.pwdPlaceholder')"
           name="password"
           size="large"
         ></el-input>
@@ -140,7 +140,9 @@ const handleLogin = () => {
       <el-row class="enter-x">
         <el-col :span="12" class="col-form">
           <el-form-item class="enter-x" style="text-align: left;">
-            <el-checkbox v-model:checked="remember">记住密码</el-checkbox>
+            <el-checkbox v-model:checked="remember">{{
+              $t('msg.login.remPwd')
+            }}</el-checkbox>
           </el-form-item>
         </el-col>
         <el-col :span="12" class="col-form">
@@ -150,7 +152,7 @@ const handleLogin = () => {
               size="small"
               @click="handleForgetPassWord"
             >
-              忘记密码？
+              {{ $t('msg.login.forgetPwd') }}
             </el-button>
           </el-form-item>
         </el-col>
@@ -163,27 +165,29 @@ const handleLogin = () => {
           style="width: 100%;"
           @click="handleLogin"
         >
-          登陆</el-button
+          {{ $t('msg.login.loginBtn') }}</el-button
         >
       </el-form-item>
       <el-row class="enter-x" style="justify-content: space-between;">
         <el-col :span="7">
-          <el-button class="block" size="large" @click="handleMobile"
-            >手机登录</el-button
-          >
+          <el-button class="block" size="large" @click="handleMobile">{{
+            $t('msg.login.mobileLog')
+          }}</el-button>
         </el-col>
         <el-col :span="7">
-          <el-button class="block" size="large" @click="handleQrCode"
-            >二维码登录</el-button
-          >
+          <el-button class="block" size="large" @click="handleQrCode">{{
+            $t('msg.login.qrcodeLog')
+          }}</el-button>
         </el-col>
         <el-col :span="7">
-          <el-button class="block" size="large" @click="handleRegister"
-            >注册</el-button
-          >
+          <el-button class="block" size="large" @click="handleRegister">{{
+            $t('msg.login.register')
+          }}</el-button>
         </el-col>
       </el-row>
-      <el-divider class="enter-x dividertxt">其他登陆方式</el-divider>
+      <el-divider class="enter-x dividertxt">{{
+        $t('msg.login.otherLogtype')
+      }}</el-divider>
       <div class="othersvg">
         <svg
           focusable="false"

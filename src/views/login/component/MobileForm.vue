@@ -5,25 +5,27 @@ import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
 import { validateMobileNumber } from '../rules'
+import { useI18n } from 'vue-i18n'
 const store = useStore()
 const formData = ref({
   mobile: '',
   sms: ''
 })
+const { t } = useI18n()
 const formRef = ref()
 const loading = ref(false)
 const mobileFormRules = ref({
   mobile: [
     {
       required: true,
-      message: '请输入合法手机号',
+      message: t('msg.toast.phoneRulesToast'),
       trigger: 'change',
       validator: validateMobileNumber()
     }
   ]
 })
 const handleReset = async () => {
-  ElMessage.warning('暂不支持手机登陆～')
+  ElMessage.warning(t('msg.toast.notSupportPhoneLog'))
 }
 const getShow = computed(
   () => store.state.user.currentState === LoginState.MOBILE
@@ -49,7 +51,7 @@ const handleBackLogin = () => {
       </span>
       <el-input
         v-model="formData.mobile"
-        placeholder="手机号"
+        :placeholder="$t('msg.login.phonePlaceholder')"
         size="large"
       ></el-input>
     </el-form-item>
@@ -59,7 +61,7 @@ const handleBackLogin = () => {
       </span>
       <CountdownInput
         v-model="formData.sms"
-        placeholder="短信验证码"
+        :placeholder="$t('msg.login.verifyCode')"
         size="large"
       ></CountdownInput>
     </el-form-item>
@@ -71,12 +73,12 @@ const handleBackLogin = () => {
         @click="handleReset"
         style="width: 100%;"
       >
-        登录
+        {{ $t('msg.login.loginBtn') }}
       </el-button>
     </el-form-item>
     <el-form-item class="enter-x">
       <el-button size="large" @click="handleBackLogin" style="width: 100%;">
-        返回
+        {{ $t('msg.login.return') }}
       </el-button>
     </el-form-item>
   </el-form>

@@ -1,5 +1,6 @@
 <script setup>
 import { isFunction } from '@/utils/is'
+import { useI18n } from 'vue-i18n'
 import { computed, ref, unref, defineProps, defineEmits } from 'vue'
 const props = defineProps({
   count: {
@@ -12,6 +13,7 @@ const props = defineProps({
   }
 })
 const emits = defineEmits(['getSms', 'resetSms'])
+const { t } = useI18n()
 const loading = ref(false)
 function useCountdown (count) {
   const currentCount = ref(count)
@@ -71,9 +73,13 @@ function useCountdown (count) {
   }
 }
 const { currentCount, isStart, start } = useCountdown(props.count)
+/* eslint-disable */
 const getButtonText = computed(() =>
-  !unref(isStart) ? '获取验证码' : `${unref(currentCount)}秒后重新获取`
+  !unref(isStart)
+    ? t('msg.login.verification')
+    : `${unref(currentCount)} ${t('msg.login.verifiBtnCodeTxt')}`
 )
+/* eslint-enable */
 async function handleStart () {
   const { beforeStartFunc } = props
   emits('getSms')

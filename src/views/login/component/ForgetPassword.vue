@@ -68,7 +68,7 @@ const handleBackLogin = () => {
       </span>
       <el-input
         v-model="formData.username"
-        placeholder="账号"
+        :placeholder="$t('msg.login.acountPlaceholder')"
         size="large"
       ></el-input>
     </el-form-item>
@@ -80,7 +80,7 @@ const handleBackLogin = () => {
       </span>
       <el-input
         v-model="formData.mobile"
-        placeholder="手机号"
+        :placeholder="$t('msg.login.phonePlaceholder')"
         size="large"
       ></el-input>
     </el-form-item>
@@ -90,7 +90,7 @@ const handleBackLogin = () => {
       </span>
       <CountDownInput
         size="large"
-        placeholder="短信验证码"
+        :placeholder="$t('msg.login.verifyCode')"
         v-model="formData.sms"
       ></CountDownInput>
     </el-form-item>
@@ -101,7 +101,7 @@ const handleBackLogin = () => {
         :loading="loading"
         @click="handleReset"
       >
-        重置
+        {{ $t('msg.login.reset') }}
       </el-button>
     </el-form-item>
     <el-form-item class="enter-x">
@@ -110,7 +110,7 @@ const handleBackLogin = () => {
         :loading="loading"
         @click="handleBackLogin"
       >
-        返回
+        {{ $t('msg.login.return') }}
       </el-button>
     </el-form-item>
   </el-form>

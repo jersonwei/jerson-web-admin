@@ -1,9 +1,25 @@
 export default {
   login: {
     title: '用户登录',
+    remPwd: '记住密码',
+    acountPlaceholder: '请输入账号',
+    pwdPlaceholder: '请输入密码',
+    rePwdPlaceholder: '请确认密码',
     loginBtn: '登录',
+    phonePlaceholder: '请输入手机号',
+    verification: '获取验证码',
+    verifiBtnCodeTxt: '秒后重新获取',
+    verifyCode: '请输入验证码',
+    mobileLog: '手机登陆',
+    qrcodeLog: '二维码登陆',
+    qrcodeTip: '扫码后点击”确认“，即可登陆',
+    register: '注册',
+    otherLogtype: '其他登陆方式',
+    forgetPwd: '忘记密码?',
     usernameRule: '用户名为必填项',
     passwordRule: '密码不能少于6位',
+    reset: '重置',
+    return: '返回',
     desc: `
     测试权限账号：<br />
     提供三种权限账号：<br />
@@ -34,7 +50,13 @@ export default {
     articleEditor: '文章编辑'
   },
   toast: {
-    switchLangSuccess: '切换语言成功'
+    switchLangSuccess: '切换语言成功',
+    accountRequired: '必须输入用户名',
+    phoneRulesToast: '请输入合法手机号',
+    pwdNotMatch: '与密码不一致',
+    accountMaxCount: '最多15位',
+    notSupportRegist: '暂不支持注册账号～',
+    notSupportPhoneLog: '暂不支持手机登陆～'
   },
   tagsView: {
     refresh: '刷新',
