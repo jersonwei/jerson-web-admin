@@ -2,6 +2,7 @@
   <div class="navbar">
     <hamburger class="hamburger-container"></hamburger>
     <bread-crumb class="breadcrumb-container"></bread-crumb>
+    <Screenfull class="right-menu-item screen hover-effect"></Screenfull>
     <ThemeSelect class="right-menu-item theme hover-effect"></ThemeSelect>
     <lang-select
       effect="dark"
@@ -47,6 +48,7 @@ import hamburger from '@/components/Hamburger/index.vue'
 import breadCrumb from '@/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
+import Screenfull from '@/components/Screenfull/index.vue'
 const store = useStore()
 const avatar = require('../../assets/ailun.jpeg')
 const handleLogOut = () => {
@@ -119,6 +121,9 @@ const handleLogOut = () => {
     }
     &.theme {
       right: 120px;
+    }
+    &.screen {
+      right: 160px;
     }
   }
 }
