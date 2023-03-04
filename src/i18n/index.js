@@ -1,18 +1,21 @@
+import { LANG } from '@/constant/LoginState'
 import { createI18n } from 'vue-i18n'
+import zhLocale from './lang/zh'
+import enLocale from './lang/en'
 const messages = {
   en: {
     msg: {
-      test: 'hello'
+      ...enLocale
     }
   },
   zh: {
     msg: {
-      test: '你好'
+      ...zhLocale
     }
   }
 }
 
-const locale = 'en'
+const locale = localStorage.getItem(LANG) || 'zh'
 const i18n = createI18n({
   // compositionAPI
   legacy: false,
