@@ -6,14 +6,20 @@ import { ElMessage } from 'element-plus'
 import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { validateMobileNumber } from '../rules'
+import { useI18n } from 'vue-i18n'
 const store = useStore()
+const { t } = useI18n()
 const formRef = ref()
 const formRules = ref({
   username: [
-    { required: true, message: '必须输入用户名', trigger: 'blur' },
+    {
+      required: true,
+      message: t('msg.toast.accountRequired'),
+      trigger: 'blur'
+    },
     {
       max: 15,
-      message: '最多15位',
+      message: t('msg.toast.accountMaxCount'),
       required: true,
       trigger: 'change'
     }
@@ -21,7 +27,7 @@ const formRules = ref({
   mobile: [
     {
       required: true,
-      message: '请输入合法手机号',
+      message: t('msg.toast.phoneRulesToast'),
       trigger: 'change',
       validator: validateMobileNumber()
     }

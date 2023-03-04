@@ -40,7 +40,7 @@ const getShow = computed(
   () => store.state.user.currentState === LoginState.LOGIN
 )
 const formData = ref({
-  username: 'super-admin',
+  username: store.state.user.loginAccount || 'super-admin',
   password: '123456'
 })
 watch(

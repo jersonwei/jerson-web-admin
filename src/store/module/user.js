@@ -7,7 +7,7 @@ export default {
   namespaced: true,
   state: () => ({
     currentState: LoginState.LOGIN,
-    loginAccount: 'super-admin',
+    loginAccount: '',
     token: '',
     userInfo: {}
   }),
