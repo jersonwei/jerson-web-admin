@@ -2,7 +2,7 @@
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
-import variable from '@/style/variable.module.scss'
+// import variable from '@/style/variable.module.scss'
 </script>
 <template>
   <div
@@ -12,7 +12,7 @@ import variable from '@/style/variable.module.scss'
     <!-- 左侧 menu -->
     <sidebar
       id="guide-sidebar"
-      :style="{ backgroundColor: variable.menuBg }"
+      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
       class="sidebar-container"
     />
     <div class="main-container">
@@ -27,7 +27,7 @@ import variable from '@/style/variable.module.scss'
 </template>
 <style lang="scss" scoped>
 @import '~@/style/mixin.scss';
-// @import '~@/style/variable.module.scss';
+@import '~@/style/variable.module.scss';
 $sideBarWidth: 210px;
 $hideSideBarWidth: 54px;
 $sideBarDuration: 0.28s;
