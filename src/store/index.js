@@ -5,12 +5,14 @@ import register from './module/register'
 import getters from './getter'
 import time from './module/time'
 import app from './module/app'
+import theme from './module/theme'
 export default createStore({
   getters,
   state: {},
   mutations: {},
   actions: {},
   modules: {
+    theme,
     user,
     register,
     time,
