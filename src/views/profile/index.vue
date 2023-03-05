@@ -31,12 +31,12 @@ import Author from './components/Author.vue'
 import { ref } from 'vue'
 import { feature } from '@/api/user'
 
+const activeName = ref('feature')
 const featureData = ref([])
 const getFeatureData = async () => {
   featureData.value = await feature()
 }
 getFeatureData()
-const activeName = ref('feature')
 </script>
 
 <style lang="scss" scoped>
