@@ -54,7 +54,6 @@ const querySearch = query => {
   } else {
     searchOptions.value = []
   }
-  console.log(searchOptions.value)
 }
 // 选中回调
 const onSelectChange = val => {

@@ -27,7 +27,6 @@ const getTitle = route => {
   } else {
     title = generateI18nTitle(route.meta.title)
   }
-  if (route.meta.title === 'userManage') console.log(route, title)
   return title
 }
 const route = useRoute()

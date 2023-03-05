@@ -51,7 +51,6 @@ export default {
     logout () {
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', {})
-      console.log(this.state)
       router.push('/login')
     }
   },

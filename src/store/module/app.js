@@ -23,7 +23,6 @@ export default {
         state.tagsViewList.push(tag)
         localStorage.setItem(TAGS_VIEW, JSON.stringify(state.tagsViewList))
       }
-      console.log(state.tagsViewList)
     },
     changeTagsData (state, { index, tag }) {
       state.tagsViewList[index] = tag

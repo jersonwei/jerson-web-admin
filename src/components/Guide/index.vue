@@ -27,7 +27,6 @@ const onClick = () => {
   driver.defineSteps(steps(i18n))
   driver.start()
 }
-console.log(driver)
 </script>
 
 <style scoped></style>

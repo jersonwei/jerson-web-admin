@@ -27,7 +27,6 @@ export const validateMobileNumber = () => {
 export const validateRegistFormRePassword = () => {
   const pwd = store.state.register.registerPwd
   return (rule, value, callback) => {
-    console.log(value)
     if (value !== pwd) {
       callback(new Error('与密码不一致'))
     } else {
