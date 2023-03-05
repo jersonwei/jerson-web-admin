@@ -3,6 +3,7 @@ import { onActivated, ref } from 'vue'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useRouter } from 'vue-router'
+import Export2Excel from './component/Export2Excel.vue'
 const router = useRouter()
 // 数据相关
 const tableData = ref([])
@@ -32,6 +33,13 @@ const handleCurrentChange = currentPage => {
   page.value = currentPage
   getListData()
 }
+/**
+ * excel 导出点击事件
+ */
+const exportToExcelVisible = ref(false)
+const onToExcelClick = () => {
+  exportToExcelVisible.value = true
+}
 onActivated(getListData)
 </script>
 <template>
@@ -41,7 +49,7 @@ onActivated(getListData)
         <el-button type="primary" @click="onImportExcelClick">
           {{ $t('msg.excel.importExcel') }}</el-button
         >
-        <el-button type="success">
+        <el-button type="success" @click="onToExcelClick">
           {{ $t('msg.excel.exportExcel') }}
         </el-button>
       </div>
@@ -110,6 +118,7 @@ onActivated(getListData)
       >
       </el-pagination>
     </el-card>
+    <Export2Excel v-model="exportToExcelVisible"></Export2Excel>
   </div>
 </template>
 

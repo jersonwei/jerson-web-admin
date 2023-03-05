@@ -18,3 +18,11 @@ export const userBatchImport = data => {
     data
   })
 }
+/**
+ * 获取所有用户列表数据
+ */
+export const getUserManageAllList = () => {
+  return request({
+    url: '/user-manage/all-list'
+  })
+}
