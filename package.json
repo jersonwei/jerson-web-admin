@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "@toast-ui/editor": "3.0.2",
     "@vueuse/core": "^9.13.0",
     "@zxcvbn-ts/core": "^2.2.1",
     "@zxcvbn-ts/language-common": "^2.0.1",

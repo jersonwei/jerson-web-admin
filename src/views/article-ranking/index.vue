@@ -4,6 +4,7 @@ import { getArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic'
 import { tableRef, initSortable } from './sortable'
+import { useRouter } from 'vue-router'
 
 // 表格拖拽相关
 onMounted(() => {
@@ -29,6 +30,13 @@ getListData()
 watchSwitchLang(getListData)
 // 处理数据不重新加载的问题
 onActivated(getListData)
+/**
+ * 查看按钮点击事件
+ */
+const router = useRouter()
+const onShowClick = row => {
+  router.push(`/article/${row._id}`)
+}
 </script>
 <template>
   <div class="article-ranking-container">

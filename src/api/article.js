@@ -19,3 +19,24 @@ export const articleSort = data => {
     data
   })
 }
+/**
+ * 创建文章
+ */
+export const createArticle = data => {
+  return request({
+    url: '/article/create',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 编辑文章详情
+ */
+export const articleEdit = data => {
+  return request({
+    url: '/article/edit',
+    method: 'POST',
+    data
+  })
+}
