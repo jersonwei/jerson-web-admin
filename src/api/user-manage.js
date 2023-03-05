@@ -26,3 +26,18 @@ export const getUserManageAllList = () => {
     url: '/user-manage/all-list'
   })
 }
+/**
+ * 获取指定用户角色
+ */
+export const userRoles = id => {
+  return request({
+    url: `/user-manage/role/${id}`
+  })
+}
+export const updateRole = (id, roles) => {
+  return request({
+    url: `/user-manage/update-role/${id}`,
+    method: 'POST',
+    data: { roles }
+  })
+}

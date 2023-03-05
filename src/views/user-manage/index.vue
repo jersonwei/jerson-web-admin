@@ -1,9 +1,10 @@
 <script setup>
-import { onActivated, ref } from 'vue'
+import { onActivated, ref, watch } from 'vue'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useRouter } from 'vue-router'
 import Export2Excel from './component/Export2Excel.vue'
+import RolesDialog from './component/roles.vue'
 const router = useRouter()
 // 数据相关
 const tableData = ref([])
@@ -41,6 +42,21 @@ const onToExcelClick = () => {
   exportToExcelVisible.value = true
 }
 onActivated(getListData)
+/**
+ * 查看角色的点击事件
+ */
+const roleDialogVisible = ref(false)
+const selectUserId = ref('')
+const onShowRoleClick = row => {
+  console.log(row)
+  roleDialogVisible.value = true
+  selectUserId.value = row._id
+  console.log(selectUserId.value)
+}
+// 保证每次打开重新获取用户角色数据
+watch(roleDialogVisible, val => {
+  if (!val) selectUserId.value = ''
+})
 </script>
 <template>
   <div class="user-manage-container">
@@ -92,11 +108,11 @@ onActivated(getListData)
           fixed="right"
           width="260"
         >
-          <template #default>
+          <template #default="{row}">
             <el-button type="primary" size="mini">{{
               $t('msg.excel.show')
             }}</el-button>
-            <el-button type="info" size="mini">{{
+            <el-button type="info" @click="onShowRoleClick(row)" size="mini">{{
               $t('msg.excel.showRole')
             }}</el-button>
             <el-button type="danger" size="mini">{{
@@ -119,6 +135,11 @@ onActivated(getListData)
       </el-pagination>
     </el-card>
     <Export2Excel v-model="exportToExcelVisible"></Export2Excel>
+    <roles-dialog
+      v-model="roleDialogVisible"
+      :userId="selectUserId"
+      @updateRole="getListData"
+    ></roles-dialog>
   </div>
 </template>
 
