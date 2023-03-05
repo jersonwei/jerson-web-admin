@@ -2,7 +2,8 @@
 import { ref } from 'vue'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 // 数据相关
 const tableData = ref([])
 const total = ref(0)
@@ -20,12 +21,19 @@ const getListData = async () => {
 getListData()
 // 监听语言切换
 watchSwitchLang(getListData)
+const onImportExcelClick = () => {
+  router.push('/user/import')
+}
+const handleSizeChange = () => {}
+const handleCurrentChange = () => {}
 </script>
 <template>
   <div class="user-manage-container">
     <el-card class="header">
       <div>
-        <el-button type="primary"> {{ $t('msg.excel.importExcel') }}</el-button>
+        <el-button type="primary" @click="onImportExcelClick">
+          {{ $t('msg.excel.importExcel') }}</el-button
+        >
         <el-button type="success">
           {{ $t('msg.excel.exportExcel') }}
         </el-button>
