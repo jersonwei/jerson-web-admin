@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import ContextMenu from './ContextMenu.vue'
 const visiable = ref(false)
 const route = useRoute()
+const store = useStore()
 const menuStyle = ref({
   left: 0,
   top: 0
@@ -12,7 +14,25 @@ const selectIndex = ref(0)
 const isActive = tag => {
   return tag.path === route.path
 }
-const onCloseClick = index => {}
+const onCloseClick = index => {
+  store.commit('app/removeTagData', {
+    type: 'index',
+    index: index
+  })
+}
+const closeMenu = () => {
+  visiable.value = false
+}
+/**
+ * 监听变化
+ */
+watch(visiable, val => {
+  if (val) {
+    document.body.addEventListener('click', closeMenu)
+  } else {
+    document.body.removeEventListener('click', closeMenu)
+  }
+})
 const openMenu = (e, index) => {
   const { x, y } = e
   menuStyle.value.left = x + 'px'

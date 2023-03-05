@@ -27,6 +27,26 @@ export default {
     },
     changeTagsData (state, { index, tag }) {
       state.tagsViewList[index] = tag
+    },
+    /**
+     * @param {type: 'other' || 'right' || 'index'} payload
+     */
+    removeTagData (state, payload) {
+      if (payload.type === 'index') {
+        state.tagsViewList.splice(payload.index, 1)
+      } else if (payload.type === 'other') {
+        state.tagsViewList.splice(
+          payload.index + 1,
+          state.tagsViewList.length - payload.index + 1
+        )
+        state.tagsViewList.splice(0, payload.index)
+      } else if (payload.type === 'right') {
+        state.tagsViewList.splice(
+          payload.index + 1,
+          state.tagsViewList.length - payload.index + 1
+        )
+      }
+      localStorage.setItem(TAGS_VIEW, JSON.stringify(state.tagsViewList))
     }
   },
   actions: {},
