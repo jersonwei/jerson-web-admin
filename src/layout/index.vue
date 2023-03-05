@@ -20,7 +20,7 @@ import TagsView from '@/components/TagsView/index.vue'
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <navbar />
-        <tags-view></tags-view>
+        <tags-view id="guide-tags"></tags-view>
       </div>
       <!-- 内容区 -->
       <app-main />

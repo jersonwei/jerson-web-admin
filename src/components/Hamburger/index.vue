@@ -11,7 +11,7 @@ const toggleClick = () => {
 </script>
 <template>
   <div class="hamburger-container" @click="toggleClick">
-    <svg-icon class="hanburger" :icon="icon"></svg-icon>
+    <svg-icon id="guide-hamburger" class="hanburger" :icon="icon"></svg-icon>
   </div>
 </template>
 <style lang="scss" scoped>

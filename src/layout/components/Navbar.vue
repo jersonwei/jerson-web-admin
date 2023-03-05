@@ -1,15 +1,19 @@
 <template>
   <div class="navbar">
     <hamburger class="hamburger-container"></hamburger>
-    <bread-crumb class="breadcrumb-container"></bread-crumb>
-    <HeaderSearch class="right-menu-item header hover-effect"></HeaderSearch>
-    <Screenfull class="right-menu-item screen hover-effect"></Screenfull>
-    <ThemeSelect class="right-menu-item theme hover-effect"></ThemeSelect>
-    <lang-select
-      effect="dark"
-      class="right-menu-item hover-effect"
-    ></lang-select>
+    <bread-crumb
+      id="guide-breadcrumb"
+      class="breadcrumb-container"
+    ></bread-crumb>
     <div class="right-menu">
+      <Guide class="right-menu-item  hover-effect"></Guide>
+      <HeaderSearch class="right-menu-item  hover-effect"></HeaderSearch>
+      <Screenfull class="right-menu-item  hover-effect"></Screenfull>
+      <ThemeSelect class="right-menu-item  hover-effect"></ThemeSelect>
+      <lang-select
+        effect="dark"
+        class="right-menu-item hover-effect"
+      ></lang-select>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -51,6 +55,7 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
+import Guide from '@/components/Guide/index.vue'
 const store = useStore()
 const avatar = require('../../assets/ailun.jpeg')
 const handleLogOut = () => {
@@ -112,25 +117,14 @@ const handleLogOut = () => {
     display: inline-block;
     padding: 0 18px 0 0;
     font-size: 28px;
-    position: absolute;
-    right: 80px;
-    top: 15px;
+    // position: absolute;
+    // right: 80px;
+    // top: 15px;
     color: #5a5e66;
     vertical-align: text-bottom;
 
     &.hover-effect {
       cursor: pointer;
-    }
-    &.theme {
-      right: 120px;
-    }
-    &.screen {
-      right: 160px;
-      top: 12px;
-    }
-    &.header {
-      right: 200px;
-      top: 10px;
     }
   }
 }
