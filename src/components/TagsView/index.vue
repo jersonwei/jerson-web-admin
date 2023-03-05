@@ -1,31 +1,54 @@
 <script setup>
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import ContextMenu from './ContextMenu.vue'
+const visiable = ref(false)
 const route = useRoute()
+const menuStyle = ref({
+  left: 0,
+  top: 0
+})
+const selectIndex = ref(0)
 const isActive = tag => {
   return tag.path === route.path
 }
 const onCloseClick = index => {}
+const openMenu = (e, index) => {
+  const { x, y } = e
+  menuStyle.value.left = x + 'px'
+  menuStyle.value.top = y + 'px'
+  visiable.value = true
+  selectIndex.value = index
+}
 </script>
 <template>
   <div class="tags-view-container">
-    <router-link
-      v-for="(tag, index) in $store.getters.tagsViewList"
-      :key="tag.fullPath"
-      class="tags-view-item"
-      :class="isActive(tag) ? 'active' : ''"
-      :to="{ path: tag.fullPath }"
-      :style="{
-        backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
-        borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
-      }"
-    >
-      {{ tag.title }}
-      <i
-        v-show="!isActive(tag)"
-        class="el-icon-close"
-        @click.prevent.stop="onCloseClick(index)"
-      ></i>
-    </router-link>
+    <el-scrollbar class="tags-view-wrapper">
+      <router-link
+        v-for="(tag, index) in $store.getters.tagsViewList"
+        :key="tag.fullPath"
+        class="tags-view-item"
+        :class="isActive(tag) ? 'active' : ''"
+        :to="{ path: tag.fullPath }"
+        @contextmenu.prevent.stop="openMenu($event, index)"
+        :style="{
+          backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
+          borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
+        }"
+      >
+        {{ tag.title }}
+        <i
+          v-show="!isActive(tag)"
+          class="el-icon-close"
+          @click.prevent.stop="onCloseClick(index)"
+        ></i>
+      </router-link>
+    </el-scrollbar>
+    <ContextMenu
+      v-show="visiable"
+      :style="menuStyle"
+      :index="selectIndex"
+    ></ContextMenu>
   </div>
 </template>
 <style lang="scss" scoped>
