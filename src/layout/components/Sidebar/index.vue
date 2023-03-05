@@ -19,7 +19,7 @@ const avatar = require('../../../assets/ailun.jpeg')
 </template>
 <style lang="scss" scoped>
 .logo-container {
-  height: 44px;
+  height: 54px;
   padding: 15px 0 15px 0;
   display: flex;
   align-items: start;

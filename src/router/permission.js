@@ -1,6 +1,6 @@
 import store from '@/store'
 import router from '.'
-const whiteList = ['/login', 'about', '484', 'Not Found']
+const whiteList = ['/login', 'about', '404', 'Not Found']
 router.beforeEach(async (to, from, next) => {
   if (store.getters.token) {
     if (to.path === '/login') {

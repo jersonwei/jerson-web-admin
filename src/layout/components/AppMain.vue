@@ -21,6 +21,7 @@ const getTitle = route => {
   } else {
     title = generateI18nTitle(route.meta.title)
   }
+  if (route.meta.title === 'userManage') console.log(route, title)
   return title
 }
 const route = useRoute()
@@ -28,7 +29,6 @@ const store = useStore()
 watch(
   route,
   (to, from) => {
-    console.log(to, from)
     if (!isTags(to.path)) return
     const { fullPath, meta, name, params, path, query } = to
     store.commit('app/addTagsViewList', {
@@ -53,7 +53,7 @@ watch(
   width: 100%;
   position: relative;
   overflow: hidden;
-  padding: 61px 20px 20px 20px;
+  padding: 86px 20px 20px 20px;
   box-sizing: border-box;
 }
 </style>
