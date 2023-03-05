@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { onActivated, ref } from 'vue'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useRouter } from 'vue-router'
@@ -18,14 +18,21 @@ const getListData = async () => {
   tableData.value = result.list
   total.value = result.total
 }
-getListData()
+// getListData()
 // 监听语言切换
 watchSwitchLang(getListData)
 const onImportExcelClick = () => {
   router.push('/user/import')
 }
-const handleSizeChange = () => {}
-const handleCurrentChange = () => {}
+const handleSizeChange = currentSize => {
+  size.value = currentSize
+  getListData()
+}
+const handleCurrentChange = currentPage => {
+  page.value = currentPage
+  getListData()
+}
+onActivated(getListData)
 </script>
 <template>
   <div class="user-manage-container">
