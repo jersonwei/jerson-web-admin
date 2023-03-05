@@ -18,7 +18,11 @@
           ></markdown>
         </el-tab-pane>
         <el-tab-pane :label="$t('msg.article.richText')" name="editor">
-          <editor @onSuccess="onSuccess" :title="title"></editor>
+          <editor
+            @onSuccess="onSuccess"
+            :title="title"
+            :detail="detail"
+          ></editor>
         </el-tab-pane>
       </el-tabs>
     </el-card>
