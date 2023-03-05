@@ -62,7 +62,11 @@ watch(roleDialogVisible, val => {
   <div class="user-manage-container">
     <el-card class="header">
       <div>
-        <el-button type="primary" @click="onImportExcelClick">
+        <el-button
+          type="primary"
+          @click="onImportExcelClick"
+          v-permission="['importUser']"
+        >
           {{ $t('msg.excel.importExcel') }}</el-button
         >
         <el-button type="success" @click="onToExcelClick">
@@ -112,12 +116,19 @@ watch(roleDialogVisible, val => {
             <el-button type="primary" size="mini">{{
               $t('msg.excel.show')
             }}</el-button>
-            <el-button type="info" @click="onShowRoleClick(row)" size="mini">{{
-              $t('msg.excel.showRole')
-            }}</el-button>
-            <el-button type="danger" size="mini">{{
-              $t('msg.excel.remove')
-            }}</el-button>
+            <el-button
+              v-permission="['distributeRole']"
+              type="info"
+              @click="onShowRoleClick(row)"
+              size="mini"
+              >{{ $t('msg.excel.showRole') }}</el-button
+            >
+            <el-button
+              type="danger"
+              v-permission="['removeUser']"
+              size="mini"
+              >{{ $t('msg.excel.remove') }}</el-button
+            >
           </template>
         </el-table-column>
       </el-table>

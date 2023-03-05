@@ -3,12 +3,13 @@ import { useRouter } from 'vue-router'
 import { filterRouters, generateMenus } from '@/utils/route'
 import { computed } from 'vue'
 import SiderbarItem from './SiderbarItem.vue'
+const router = useRouter()
 const routes = computed(() => {
   const filterRoute = filterRouters(router.getRoutes())
+  console.log(router.getRoutes(), filterRoute)
   return generateMenus(filterRoute)
 })
 console.log(routes)
-const router = useRouter()
 </script>
 <template>
   <!-- 一级 menu 菜单 -->
