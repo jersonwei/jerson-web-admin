@@ -6,12 +6,14 @@ import getters from './getter'
 import time from './module/time'
 import app from './module/app'
 import theme from './module/theme'
+import permission from './module/permission'
 export default createStore({
   getters,
   state: {},
   mutations: {},
   actions: {},
   modules: {
+    permission,
     theme,
     user,
     register,

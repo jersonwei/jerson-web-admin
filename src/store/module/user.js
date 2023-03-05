@@ -1,6 +1,6 @@
 import { getUserInfo, login } from '@/api/sys'
 import { LoginState } from '@/constant/LoginState'
-import router from '@/router'
+import router, { resetRouter } from '@/router'
 import { setLogTimeStamp } from '@/utils/auth'
 import md5 from 'md5'
 export default {
@@ -49,8 +49,10 @@ export default {
       return res
     },
     logout () {
+      resetRouter()
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', {})
+      localStorage.clear()
       router.push('/login')
     }
   },

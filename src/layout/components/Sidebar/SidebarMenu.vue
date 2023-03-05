@@ -7,6 +7,7 @@ const routes = computed(() => {
   const filterRoute = filterRouters(router.getRoutes())
   return generateMenus(filterRoute)
 })
+console.log(routes)
 const router = useRouter()
 </script>
 <template>
