@@ -1,4 +1,8 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory
+} from 'vue-router'
 // import layout from '@/layout'
 import ArticleCreaterRouter from './module/ArticleCreate'
 import ArticleRouter from './module/Article'
@@ -167,7 +171,10 @@ export const publicRoutes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history:
+    process.env.NODE_ENV === 'production'
+      ? createWebHistory()
+      : createWebHashHistory(),
   routes: publicRoutes
 })
 
