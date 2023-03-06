@@ -1,4 +1,4 @@
-<script setup="props">
+<script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { useRafFn, useWindowSize } from '@vueuse/core'
 const r180 = Math.PI
