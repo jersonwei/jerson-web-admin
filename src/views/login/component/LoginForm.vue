@@ -6,7 +6,9 @@ import { useStore } from 'vuex'
 import { LoginState } from '../../../constant/LoginState'
 import { validateLoginFormPassword } from '../rules'
 import { useI18n } from 'vue-i18n'
+import router from '@/router'
 import LangSelect from '@/components/LangSelect/index.vue'
+import serviceInstance from '@/axios/service'
 // import { toLine } from '@/utils/toLine'
 const store = useStore()
 const { t } = useI18n()
@@ -77,23 +79,40 @@ const onChangePwdType = () => {
 }
 // 登录
 const handleLogin = () => {
-  formRef.value.validate(valid => {
+  formRef.value.validate(async valid => {
     if (!valid) {
       ElMessage.error(t('msg.toast.formVerifyError'))
     }
     loading.value = true
-    store
-      .dispatch('user/login', formData.value)
-      .then(res => {
-        loading.value = true
-        store.commit('user/setToken', res.token)
-      })
-      .catch(err => {
-        console.dir(err)
-      })
-      .finally(() => {
+    const res = await serviceInstance.post('/user/login', formData.value)
+    if (res.status === 201 || res.status === 200) {
+      const { message: msg, data } = res.data
+      if (msg === 'success') {
+        ElMessage.success('登陆成功')
+        localStorage.setItem('access_token', data.accessToken)
+        localStorage.setItem('refresh_token', data.refreshToken)
+        localStorage.setItem('user_info', JSON.stringify(data.userInfo))
+        router.push('/')
+      } else {
+        ElMessage.error(data)
         loading.value = false
-      })
+      }
+    } else {
+      ElMessage.error('系统繁忙,请稍后再试')
+    }
+    // store
+    //   .dispatch('user/login', formData.value)
+    //   .then(res => {
+    //     loading.value = true
+    //     store.commit('user/setToken', res.token)
+    //   })
+    //   .catch(err => {
+    //     console.dir(err)
+    //   })
+    //   .finally(() => {
+    //     router.push('/')
+    //     loading.value = false
+    //   })
   })
 }
 </script>

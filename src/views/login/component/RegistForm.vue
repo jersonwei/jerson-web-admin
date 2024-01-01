@@ -1,16 +1,18 @@
 <script setup>
-import CountDownInput from '@/components/Countdown/src/CountDownInput.vue'
+// import CountDownInput from '@/components/Countdown/src/CountDownInput.vue'
 import StrengthMeter from '@/components/StrengthMeter/src/StrengthMeter.vue'
 import { LoginState } from '@/constant/LoginState'
 import { ElMessage } from 'element-plus'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import {
   validateLoginFormPassword,
-  validateMobileNumber
-  // validateRegistFormRePassword
+  validateMobileNumber,
+  validateEmail
 } from '../rules'
+import serviceInstance from '@/axios/service'
+import CountDownEmailCode from '@/components/Countdown/src/CountDownEmailCode.vue'
 const store = useStore()
 const { t } = useI18n()
 const getShow = computed(
@@ -18,15 +20,17 @@ const getShow = computed(
 )
 const formRef = ref()
 const loading = ref(false)
+const isCanSendEmailCode = ref(true)
 const formData = ref({
   username: '',
   password: '',
   confirmPassword: '',
+  nickName: '',
   mobile: '',
-  sms: ''
+  email: '872937094@qq.com',
+  captcha: ''
 })
 const validateRegistFormRePassword = () => {
-  // const pwd = store.state.register.registerPwd
   return (rule, value, callback) => {
     if (formData.value.confirmPassword !== formData.value.password) {
       callback(new Error(t('msg.toast.pwdNotMatch')))
@@ -46,6 +50,26 @@ const registFormRules = ref({
       max: 15,
       message: `${t('msg.toast.accountMaxCount')}`,
       required: true,
+      trigger: 'change'
+    }
+  ],
+  nickName: [
+    {
+      required: true,
+      message: `${t('msg.toast.nickNameRequired')}`,
+      trigger: 'blur'
+    }
+  ],
+  email: [
+    {
+      required: true,
+      message: `${t('msg.toast.emailRequired')}`,
+      trigger: 'change'
+    },
+    {
+      required: true,
+      validator: validateEmail,
+      message: `${t('msg.toast.emailRulesToast')}`,
       trigger: 'change'
     }
   ],
@@ -74,8 +98,52 @@ const registFormRules = ref({
     }
   ]
 })
-const handleRegister = () => {
-  ElMessage.warning(t('msg.toast.notSupportRegist'))
+const sendCaptcha = async () => {
+  const res = await serviceInstance.get('/user/register-captcha', {
+    params: {
+      address: formData.value.email
+    }
+  })
+  if (res.status === 201 || res.status === 200) {
+    ElMessage.success(res.data.data)
+  } else {
+    ElMessage.error('系统繁忙请稍后再试')
+  }
+}
+watch(
+  () => formData.value,
+  val => {
+    isCanSendEmailCode.value =
+      val.email &&
+      !/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(val.email)
+  },
+  {
+    deep: true
+  }
+)
+const handleRegister = async () => {
+  // ElMessage.warning(t('msg.toast.notSupportRegist'))
+  formRef.value.validate(async valid => {
+    if (!valid) {
+      ElMessage.error(t('msg.toast.formVerifyError'))
+    } else {
+      const res = await serviceInstance.post('/user/register', formData.value)
+      if (res.status === 201 || res.status === 200) {
+        const { message: msg, data } = res.data
+        if (msg === 'success') {
+          ElMessage.success('注册成功')
+          localStorage.setItem('access_token', data.accessToken)
+          localStorage.setItem('refresh_token', data.refreshToken)
+          localStorage.setItem('user_info', JSON.stringify(data.userInfo))
+          handleBackLogin()
+        } else {
+          ElMessage.error(data)
+        }
+      } else {
+        ElMessage.error('系统繁忙，请稍后再试')
+      }
+    }
+  })
 }
 const handleBackLogin = () => {
   store.commit('user/setCurrentState', LoginState.LOGIN)
@@ -109,6 +177,16 @@ const handlePwdChange = val => {
         size="large"
       ></el-input>
     </el-form-item>
+    <el-form-item class="enter-x" prop="nickName">
+      <span class="svgComponent">
+        <el-icon><EditPen /></el-icon>
+      </span>
+      <el-input
+        v-model="formData.nickName"
+        :placeholder="$t('msg.login.nickNamePlaceholder')"
+        size="large"
+      ></el-input>
+    </el-form-item>
     <el-form-item class="enter-x" prop="mobile">
       <span class="svgComponent">
         <el-icon>
@@ -121,15 +199,27 @@ const handlePwdChange = val => {
         size="large"
       ></el-input>
     </el-form-item>
-    <el-form-item class="enter-x count" prop="sms">
+    <el-form-item class="enter-x" prop="email">
+      <span class="svgComponent">
+        <el-icon><Message /></el-icon>
+      </span>
+      <el-input
+        v-model="formData.email"
+        :placeholder="$t('msg.login.emailPlaceholder')"
+        size="large"
+      ></el-input>
+    </el-form-item>
+    <el-form-item class="enter-x count" prop="captcha">
       <span class="svgComponent">
         <el-icon><ChatLineSquare /></el-icon>
       </span>
-      <CountDownInput
-        v-model="formData.sms"
+      <CountDownEmailCode
+        @on-sendCaptcha="sendCaptcha"
+        :isDisabled="isCanSendEmailCode"
+        v-model="formData.captcha"
         size="large"
         :placeholder="$t('msg.login.verifyCode')"
-      ></CountDownInput>
+      ></CountDownEmailCode>
     </el-form-item>
     <el-form-item class="enter-x" prop="password">
       <StrengthMeter

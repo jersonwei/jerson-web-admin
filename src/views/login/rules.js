@@ -34,3 +34,11 @@ export const validateRegistFormRePassword = () => {
     }
   }
 }
+
+export const validateEmail = (rule, value, callback) => {
+  if (value && !/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value)) {
+    callback(new Error('请输入正确的邮箱'))
+  } else {
+    callback()
+  }
+}
